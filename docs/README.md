@@ -1,105 +1,47 @@
-# Modulo DbForge
+# 🛠️ **DbForge Module** - Schema Automation & Intelligence
 
-## Descrizione
+[![Laravel 12.x](https://img.shields.io/badge/Laravel-12.x-red.svg)](https://laravel.com/)
+[![PHPStan level 10](https://img.shields.io/badge/PHPStan-Level%2010-brightgreen.svg)](https://phpstan.org/)
+[![Database Management](https://img.shields.io/badge/Tools-Forge%20%7C%20Migrate%20%7C%20Seed-orange.svg)](https://laravel.com/docs/11.x/migrations)
 
-Il modulo DbForge fornisce strumenti avanzati per la gestione e manipolazione del database nel sistema TechPlanner. Questo modulo è progettato per offrire funzionalità di database management attraverso un'interfaccia Filament.
+> **🚀 Modulo DbForge**: Il cuore dell'ingegneria del database per Laraxot. Automatizza la creazione del codice a partire dallo schema, gestisce migrazioni complesse e fornisce un'interfaccia visuale per la manipolazione della struttura dati.
 
-## Caratteristiche
+## 📋 **Panoramica**
 
-- **Gestione Database**: Strumenti per la gestione avanzata del database
-- **Migrazioni**: Supporto per migrazioni complesse e personalizzate
-- **Schema Management**: Gestione dello schema del database
-- **Query Builder**: Interfaccia per la costruzione di query complesse
-- **Backup e Restore**: Funzionalità di backup e ripristino del database
+Il modulo **DbForge** non è un semplice gestore di migrazioni, ma un vero "fabbro" del database.
 
-## Struttura del Modulo
+- 🧬 **Reverse Engineering**: Generazione automatica di modelli Eloquent, Migrazioni e Factory a partire da tabelle esistenti.
+- 🏗️ **Schema Guard**: Monitoraggio delle differenze tra schema fisico e definizioni del codice.
+- ⚡ **Filament DB Manager**: Pannello amministrativo per eseguire query, visualizzare strutture e gestire indici senza tool esterni.
+- 🧹 **Code Cleaning**: Strumenti per normalizzare i nomi dei campi e rimuovere ridondanze nello schema.
 
-```
-Modules/DbForge/
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/
-│   │   └── Middleware/
-│   ├── Models/
-│   ├── Providers/
-│   │   ├── DbForgeServiceProvider.php
-│   │   └── Filament/
-│   │       └── AdminPanelProvider.php
-│   └── Services/
-├── config/
-├── database/
-│   ├── factories/
-│   ├── migrations/
-│   └── seeders/
-├── docs/
-├── lang/
-├── resources/
-│   ├── views/
-│   └── js/
-├── routes/
-└── tests/
-```
+## ⚡ **Funzionalità Core**
 
-## Installazione
+### 🧩 **Automated Code Generation**
+Comandi CLI avanzati per accelerare lo sviluppo trasformando lo schema SQL in classi PHP pronte per l'uso (Level 10 compliant).
 
-Il modulo è già incluso nel progetto principale. Per attivarlo:
+### 🧘 **Philosophical Design**
+Il database è la "verità assoluta". Il codice deve riflettere lo schema in modo fedele e automatizzato.
 
-1. Assicurarsi che il modulo sia presente in `Modules/DbForge/`
-2. Verificare che i provider siano registrati in `config/app.php`
-3. Eseguire le migrazioni: `php artisan migrate`
+## 🚀 **Quick Start**
 
-## Configurazione
-
-### Provider
-
-Il modulo registra automaticamente i seguenti provider:
-
-- `Modules\DbForge\Providers\DbForgeServiceProvider`
-- `Modules\DbForge\Providers\Filament\AdminPanelProvider`
-
-### Dipendenze
-
-Il modulo richiede i seguenti moduli:
-- Xot (modulo base)
-- User (modulo utenti)
-
-## Utilizzo
-
-### Accesso all'Interfaccia
-
-L'interfaccia Filament è accessibile attraverso il pannello di amministrazione del sistema.
-
-### API
-
-Il modulo fornisce API REST per le operazioni di database management.
-
-## Sviluppo
-
-### Test
-
-Eseguire i test con:
+### 📦 **Generazione Modelli da Schema**
 ```bash
-./vendor/bin/pest --no-coverage
+php artisan dbforge:generate-models --table=users
 ```
 
-### Analisi del Codice
+### ⚙️ **Verifica Stato Database**
+Consultare la dashboard **DbForge** nell'Admin Panel per un check rapido sull'integrità delle migrazioni.
 
-Eseguire l'analisi statica con:
-```bash
-vendor/bin/phpstan analyse
-```
+## 📚 **Documentazione Centrale**
 
-### Formattazione
+- 📖 **[Indice Documentazione](./index.md)** - Guida completa al modulo.
+- 🙏 **[Filosofia](./philosophy.md)** - Perché lo schema-first è fondamentale.
+- 🗺️ **[Roadmap](./roadmap.md)** - Verso la generazione automatica dei Form Filament.
+- 🏗️ **[Nesting Guide](./filament-nesting-complete-guide.md)** - Come organizziamo le tabelle correlate.
 
-Formattare il codice con:
-```bash
-vendor/bin/php-cs-fixer fix --allow-risky=yes
-```
+---
 
-## Documentazione Tecnica
-
-Per informazioni tecniche dettagliate, consultare i file nella cartella `docs/`.
-
-## Licenza
-
-MIT License - vedere il file LICENSE per i dettagli. 
+**🔄 Ultimo aggiornamento**: 31 Gennaio 2026
+**📦 Versione**: 1.5.0
+**✅ PHPStan level 10**: Compliance verificata
