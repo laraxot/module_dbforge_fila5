@@ -1,18 +1,16 @@
 {
   "name": "laraxot/module_dbforge_fila3",
-  "description": "Modulo per la gestione e manipolazione del database con strumenti avanzati",
-  "keywords": [
-    "laraxot",
-    "laravel",
-    "filament",
-    "module_dbforge",
-    "Laravel",
-    "Database",
-    "DbForge",
-    "Database management",
-    "Database tools",
-    "Xot"
-  ],
+    "description": "Database management and manipulation module for the Laraxot ecosystem with advanced tools.",
+    "keywords": [
+        "laraxot",
+        "laravel",
+        "filament",
+        "module_dbforge",
+        "database",
+        "dbforge",
+        "migrations",
+        "schema"
+    ],
   "homepage": "https://github.com/laraxot/module_dbforge_fila3",
   "license": "MIT",
   "authors": [

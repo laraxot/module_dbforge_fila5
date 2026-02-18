@@ -25,14 +25,14 @@ Trasformare DbForge in un tool di scaffolding completo che non solo generi model
 
 ## 📋 Piano d'Azione
 
-### Fase 1: Qualità Codice (Completed)
+### Fase 1: Qualità Codice (Completed/In Progress)
 - [x] PHPStan Level 10 Compliance.
 - [x] Pulizia documentazione redundante e standardizzazione nomi.
 - [x] GitHub Action automation for Quality Check and Releases.
-
-### Fase 2: Scaffolding Avanzato (In Progress)
-- [ ] Fix bug `isset` segnalato in `GenerateModelsFromSchemaCommand.php`.
+- [ ] Fix bug `isset` segnalato.
 - [ ] Aggiornamento `AdminPanelProvider` per compatibilità totale Filament v5.
+
+### Fase 2: Scaffolding Avanzato (Settimana 2)
 - [ ] Generazione automatica di `Searchable` e `Sortable` in base agli indici DB.
 
 ## 🔗 Collegamenti

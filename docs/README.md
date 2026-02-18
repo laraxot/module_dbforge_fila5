@@ -45,3 +45,15 @@ Consultare la dashboard **DbForge** nell'Admin Panel per un check rapido sull'in
 **🔄 Ultimo aggiornamento**: 31 Gennaio 2026
 **📦 Versione**: 1.5.0
 **✅ PHPStan level 10**: Compliance verificata
+
+## 🚀 Release su GitHub
+Le release sono basate su tag Git e possono includere release notes generate automaticamente.
+Workflow locale: `.github/workflows/release.yml`.
+
+
+## 📄 License & Authors
+
+**Authors:**
+- Marco Sottana <marco.sottana@gmail.com>
+
+**License:** MIT
