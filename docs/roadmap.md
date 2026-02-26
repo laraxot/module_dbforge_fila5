@@ -1,40 +1,49 @@
-# Roadmap Modulo DbForge - Database Engineering
+# DbForge Module - Roadmap
 
-**Data Aggiornamento**: 2026-01-31  
-**Status**: 📋 IN MANUTENZIONE  
-**Versione**: 1.5.0
+"Database engineering: scaffolding e utilities."
 
-## 🎯 Obiettivo
+## Visione
 
-Trasformare DbForge in un tool di scaffolding completo che non solo generi modelli, ma anche Risorse Filament e Test Pest sincronizzati con lo schema DB.
+Trasformare DbForge in tool di scaffolding completo che genera modelli, Risorse Filament e Test Pest sincronizzati con lo schema DB.
 
-## 🚨 TODO e Miglioramenti Identificati
+## Stato attuale
 
-### 1. Fix Comandi Console
-**Problema**: Il comando `GenerateModelsFromSchemaCommand.php` contiene controlli ridondanti (isset su proprietà statiche o simili) che sporcano i log.
-**Priorità**: 🔴 Alta
-**Task**: Rivedere la linea 237 e normalizzare i check.
+| Metrica | Valore |
+|---------|--------|
+| PHPStan Level 10 | Compliance |
+| XotBase Compliance | Sì |
+| Status | In manutenzione |
 
-### 2. Allineamento Filament v5 (Clusters)
-**Problema**: Le utility DB sono sparse. Devono essere raggruppate in un Cluster "Core" o "Database".
-**Priorità**: 🟢 Bassa - Funzionale ma non prioritario.
+## Fasi di sviluppo
 
-### 3. Integrazione con Spatie Schema-Diff
-**Problema**: Migliorare la rilevazione dei drift tra schema locale e produzione.
-**Priorità**: 🟡 Media
+### Fase 1: Qualità (In Progress)
+- [x] PHPStan Level 10 Compliance
+- [x] Pulizia documentazione
+- [x] GitHub Action automation
+- [ ] Fix bug isset in GenerateModelsFromSchemaCommand
+- [ ] Aggiornamento AdminPanelProvider Filament v5
 
-## 📋 Piano d'Azione
+### Fase 2: Scaffolding (Planned)
+- [ ] Generazione automatica Searchable e Sortable da indici DB
+- [ ] Cluster "Database" per utility DB
+- [ ] Integrazione Spatie Schema-Diff per drift detection
 
-### Fase 1: Qualità Codice (Completed/In Progress)
-- [x] PHPStan Level 10 Compliance.
-- [x] Pulizia documentazione redundante e standardizzazione nomi.
-- [x] GitHub Action automation for Quality Check and Releases.
-- [ ] Fix bug `isset` segnalato.
-- [ ] Aggiornamento `AdminPanelProvider` per compatibilità totale Filament v5.
+### Fase 3: Advanced (Future)
+- [ ] Generazione completa Resource da schema
+- [ ] Migration diff automatico
+- [ ] Documentazione schema
 
-### Fase 2: Scaffolding Avanzato (Settimana 2)
-- [ ] Generazione automatica di `Searchable` e `Sortable` in base agli indici DB.
+## Checklist qualità
 
-## 🔗 Collegamenti
-- [README](./README.md)
-- [Filosophy](./philosophy.md)
+- [x] PHPStan Level 10
+- [ ] Zero bug noti
+- [ ] Documentazione comandi
+
+## Collegamenti
+
+- [README](README.md)
+- [philosophy](philosophy.md)
+
+---
+
+**Ultimo aggiornamento**: 2026-02-24
