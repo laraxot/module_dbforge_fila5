@@ -59,7 +59,11 @@ The DbForge module provides comprehensive database management and development to
 ## Integration with Other Modules
 - **Xot**: Base database infrastructure
 - **Limesurvey**: Multi-database support for surveys
-- **Quaeris**: Survey data database management
+<<<<<<< .merge_file_KnDoCk
+- **healthcare_app**: Survey data database management
+=======
+- **ModuloEsempio**: Survey data database management
+>>>>>>> .merge_file_LWKctt
 - **Tenant**: Multi-tenant database management
 - **Filament**: Database administration interface
 

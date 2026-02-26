@@ -49,10 +49,10 @@ class DbForgeMigrationFactory extends Factory
             'created_by' => $this->faker->optional()->numberBetween(1, 100),
             'executed_at' => $this->faker->optional()->dateTimeBetween('-1 year', 'now'),
             'metadata' => [
-                'module' => $this->faker->randomElement(['User', 'Cms', 'Quaeris', 'Xot', 'DbForge']),
+                'module' => $this->faker->randomElement(['User', 'Cms', 'ModuloEsempio', 'Xot', 'DbForge']),
                 'description' => $this->faker->sentence(),
                 'version' => $this->faker->semver(),
-                'dependencies' => $this->faker->optional()->randomElements(['User', 'Cms', 'Quaeris', 'Xot'], $this->faker->numberBetween(0, 3)),
+                'dependencies' => $this->faker->optional()->randomElements(['User', 'Cms', 'ModuloEsempio', 'Xot'], $this->faker->numberBetween(0, 3)),
                 'checksum' => $this->faker->sha1(),
             ],
             'settings' => [
