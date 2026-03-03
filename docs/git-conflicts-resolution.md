@@ -5,7 +5,7 @@
 ### 1. composer_conflict.json
 **Conflitti Multipli**:
 - **Linea 2-30**: Nome e descrizione del modulo
-  - HEAD: `laraxot/module_dbforge_fila3` (versione Laraxot completa)
+  - HEAD: `laraxot/module_dbforge_fila5` (versione Laraxot completa)
   - BRANCH: `nwidart/dbforge` (versione base Nwidart)
 - **Linea 35-46**: Providers Laravel
   - HEAD: Providers specifici Laraxot con AdminPanelProvider
@@ -35,7 +35,7 @@
 ### Pattern di Risoluzione per File JSON
 ```json
 {
-    "name": "laraxot/module_dbforge_fila3",
+    "name": "laraxot/module_dbforge_fila5",
     "description": "Modulo per la gestione e manipolazione del database con strumenti avanzati",
     "authors": [
         {

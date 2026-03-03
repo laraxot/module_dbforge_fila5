@@ -1,5 +1,5 @@
 {
-  "name": "laraxot/module_dbforge_fila3",
+  "name": "laraxot/module_dbforge_fila5",
     "description": "Database management and manipulation module for the Laraxot ecosystem with advanced tools.",
     "keywords": [
         "laraxot",
@@ -11,7 +11,7 @@
         "migrations",
         "schema"
     ],
-  "homepage": "https://github.com/laraxot/module_dbforge_fila3",
+  "homepage": "https://github.com/laraxot/module_dbforge_fila5",
   "license": "MIT",
   "authors": [
     {

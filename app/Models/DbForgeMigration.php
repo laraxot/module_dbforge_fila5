@@ -19,6 +19,14 @@ namespace Modules\DbForge\Models;
  * @property array|null $settings
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Modules\Ptv\Models\Profile|null $creator
+ * @property-read \Modules\Ptv\Models\Profile|null $deleter
+ * @property-read \Modules\Ptv\Models\Profile|null $updater
+ * @method static \Modules\DbForge\Database\Factories\DbForgeMigrationFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeMigration newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeMigration newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeMigration query()
+ * @mixin \Eloquent
  */
 class DbForgeMigration extends BaseModel
 {
