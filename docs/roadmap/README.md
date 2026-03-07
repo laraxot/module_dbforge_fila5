@@ -2,11 +2,7 @@
 
 ## 🎯 Module Purpose
 
-<<<<<<< .merge_file_OaLwKF
 The DbForge module provides advanced database management tools, schema manipulation utilities, and database optimization features for the healthcare_app Fila5 Mono application. It serves as the database administration and migration toolkit.
-=======
-The DbForge module provides advanced database management tools, schema manipulation utilities, and database optimization features for the ModuloEsempio Fila5 Mono application. It serves as the database administration and migration toolkit.
->>>>>>> .merge_file_W2UNR1
 
 ## 📋 Current Status
 

@@ -75,11 +75,7 @@ app(SchemaGuardAction::class)->execute('user');
 // Monitora differenze tra schema fisico e codice
 // Utile dopo aggiornamenti, merge di branch, o migrazioni mancanti
 
-<<<<<<< .merge_file_fMYEbF
 $diff = app(SchemaGuardAction::class)->execute('healthcare_app');
-=======
-$diff = app(SchemaGuardAction::class)->execute('ptvx');
->>>>>>> .merge_file_5WUUZ8
 // [
 //     'missing_in_code' => ['new_column_added_manually'],
 //     'missing_in_db' => ['column_in_migration_not_migrated'],
@@ -93,11 +89,7 @@ $diff = app(SchemaGuardAction::class)->execute('ptvx');
 
 ```
 DbForge ──> Limesurvey (reverse engineering tabelle lime_*)
-<<<<<<< .merge_file_fMYEbF
 DbForge ──> healthcare_app    (generazione modelli survey)
-=======
-DbForge ──> ModuloEsempio    (generazione modelli survey)
->>>>>>> .merge_file_5WUUZ8
 DbForge ──> Xot        (estende XotBaseMigration)
 ```
 

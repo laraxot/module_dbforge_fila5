@@ -1,16 +1,8 @@
-<<<<<<< .merge_file_S8Xf1O
 # Migliora Roadmap - Guida Completa al Nesting di Filament in healthcare_app Fila5 Mono
 
 ## 📋 Panoramica del Nesting nel Progetto
 
 Questo documento analizza in profondità l'implementazione del nesting di Filament nel progetto healthcare_app Fila5 Mono, identificando i moduli che utilizzano già questa funzionalità e quelli che potrebbero beneficiarne.
-=======
-# Migliora Roadmap - Guida Completa al Nesting di Filament in ModuloEsempio Fila5 Mono
-
-## 📋 Panoramica del Nesting nel Progetto
-
-Questo documento analizza in profondità l'implementazione del nesting di Filament nel progetto ModuloEsempio Fila5 Mono, identificando i moduli che utilizzano già questa funzionalità e quelli che potrebbero beneficiarne.
->>>>>>> .merge_file_UGAKyM
 
 ### 🏗️ Architettura Base Xot
 
@@ -24,11 +16,7 @@ Il progetto utilizza **XotBaseRelationManager** come base per tutti i RelationMa
 
 ### ✅ Moduli che Già Utilizzano il Nesting
 
-<<<<<<< .merge_file_S8Xf1O
 #### 1. **Modulo healthcare_app** - Implementazione Completa
-=======
-#### 1. **Modulo ModuloEsempio** - Implementazione Completa
->>>>>>> .merge_file_UGAKyM
 
 **Relazioni Implementate:**
 - **Customer → SurveyPdfs** (HasMany)
@@ -495,11 +483,7 @@ class QuestionChartsRelationManager extends XotBaseRelationManager
 
 ### Pattern del Progetto
 - XotBaseRelationManager (`Modules/Xot/`)
-<<<<<<< .merge_file_S8Xf1O
 - Esempi esistenti in `healthcare_app/` e `User/`
-=======
-- Esempi esistenti in `ModuloEsempio/` e `User/`
->>>>>>> .merge_file_UGAKyM
 
 ### Best Practices
 - Sempre estendere XotBaseRelationManager

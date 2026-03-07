@@ -1,4 +1,3 @@
-<<<<<<< .merge_file_Tvsaq1
 # Analisi del Nesting Reale nel Progetto healthcare_app Fila5 Mono
 
 ## 📊 Analisi Completa delle Implementazioni Esistenti
@@ -8,37 +7,18 @@
 #### 1. **Customer → SurveyPdfs RelationManager**
 
 **File:** `Modules/healthcare_app/app/Filament/Resources/CustomerResource/RelationManagers/SurveyPdfsRelationManager.php`
-=======
-# Analisi del Nesting Reale nel Progetto ModuloEsempio Fila5 Mono
-
-## 📊 Analisi Completa delle Implementazioni Esistenti
-
-### 🎯 Modulo ModuloEsempio - Implementazioni Real
-
-#### 1. **Customer → SurveyPdfs RelationManager**
-
-**File:** `Modules/ModuloEsempio/app/Filament/Resources/CustomerResource/RelationManagers/SurveyPdfsRelationManager.php`
->>>>>>> .merge_file_wxPqrZ
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-<<<<<<< .merge_file_Tvsaq1
 namespace Modules\healthcare_app\Filament\Resources\CustomerResource\RelationManagers;
-=======
-namespace Modules\ModuloEsempio\Filament\Resources\CustomerResource\RelationManagers;
->>>>>>> .merge_file_wxPqrZ
 
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
-<<<<<<< .merge_file_Tvsaq1
 use Modules\healthcare_app\Filament\Resources\SurveyPdfResource;
-=======
-use Modules\ModuloEsempio\Filament\Resources\SurveyPdfResource;
->>>>>>> .merge_file_wxPqrZ
 
 class SurveyPdfsRelationManager extends RelationManager
 {
@@ -73,11 +53,7 @@ class SurveyPdfsRelationManager extends RelationManager
 
 **Model Relationship Corrispondente:**
 ```php
-<<<<<<< .merge_file_Tvsaq1
 // Modules/healthcare_app/app/Models/Customer.php
-=======
-// Modules/ModuloEsempio/app/Models/Customer.php
->>>>>>> .merge_file_wxPqrZ
 public function surveyPdfs(): HasMany
 {
     return $this->hasMany(SurveyPdf::class);
@@ -86,22 +62,14 @@ public function surveyPdfs(): HasMany
 
 #### 2. **SurveyPdf → QuestionCharts RelationManager**
 
-<<<<<<< .merge_file_Tvsaq1
 **File:** `Modules/healthcare_app/app/Filament/Resources/SurveyPdfResource/RelationManagers/QuestionChartsRelationManager.php`
-=======
-**File:** `Modules/ModuloEsempio/app/Filament/Resources/SurveyPdfResource/RelationManagers/QuestionChartsRelationManager.php`
->>>>>>> .merge_file_wxPqrZ
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-<<<<<<< .merge_file_Tvsaq1
 namespace Modules\healthcare_app\Filament\Resources\SurveyPdfResource\RelationManagers;
-=======
-namespace Modules\ModuloEsempio\Filament\Resources\SurveyPdfResource\RelationManagers;
->>>>>>> .merge_file_wxPqrZ
 
 use Filament\Actions\Action;
 use Filament\Actions\BulkAction;
@@ -128,7 +96,6 @@ use Modules\Chart\Actions\Chart\GetFontFamilyOptions;
 use Modules\Chart\Actions\Chart\GetFontStyleOptions;
 use Modules\Chart\Actions\Chart\GetTypeOptions;
 use Modules\Limesurvey\Models\SurveyResponse;
-<<<<<<< .merge_file_Tvsaq1
 use Modules\healthcare_app\Actions\QuestionChart\GetQuestionOptionsBySurveyId;
 use Modules\healthcare_app\Actions\QuestionChart\MakeImgByQuestionChartModel2Action;
 use Modules\healthcare_app\Actions\SurveyPdf\ExportTypeAction;
@@ -138,17 +105,6 @@ use Modules\healthcare_app\Exports\EmailsExport;
 use Modules\healthcare_app\Filament\Resources\QuestionChartResource;
 use Modules\healthcare_app\Models\QuestionChart;
 use Modules\healthcare_app\Models\SurveyPdf;
-=======
-use Modules\ModuloEsempio\Actions\QuestionChart\GetQuestionOptionsBySurveyId;
-use Modules\ModuloEsempio\Actions\QuestionChart\MakeImgByQuestionChartModel2Action;
-use Modules\ModuloEsempio\Actions\SurveyPdf\ExportTypeAction;
-use Modules\ModuloEsempio\Datas\AnswersFilterData;
-use Modules\ModuloEsempio\Exports\AlertExport;
-use Modules\ModuloEsempio\Exports\EmailsExport;
-use Modules\ModuloEsempio\Filament\Resources\QuestionChartResource;
-use Modules\ModuloEsempio\Models\QuestionChart;
-use Modules\ModuloEsempio\Models\SurveyPdf;
->>>>>>> .merge_file_wxPqrZ
 use function Safe\date;
 use Webmozart\Assert\Assert;
 
@@ -360,11 +316,7 @@ class QuestionChartsRelationManager extends RelationManager
 
 **Model Relationships Corrispondenti:**
 ```php
-<<<<<<< .merge_file_Tvsaq1
 // Modules/healthcare_app/app/Models/SurveyPdf.php
-=======
-// Modules/ModuloEsempio/app/Models/SurveyPdf.php
->>>>>>> .merge_file_wxPqrZ
 public function questionCharts(): HasMany
 {
     return $this->hasMany(QuestionChart::class);
@@ -615,11 +567,7 @@ BulkAction::make('regen-imgs')
 ## 📊 Metriche di Utilizzo Correnti
 
 ### Moduli con Nesting Implementato:
-<<<<<<< .merge_file_Tvsaq1
 - ✅ **healthcare_app**: 2 RelationManagers (Customer→SurveyPdfs, SurveyPdf→QuestionCharts)
-=======
-- ✅ **ModuloEsempio**: 2 RelationManagers (Customer→SurveyPdfs, SurveyPdf→QuestionCharts)
->>>>>>> .merge_file_wxPqrZ
 - ✅ **User**: 1+ RelationManagers (User→Roles con XotBase)
 
 ### Moduli senza Nesting (opportunità):
