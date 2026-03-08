@@ -50,7 +50,7 @@ class DbForgeBackupFactory extends Factory
                 'checksum' => $faker->sha1(
                 'version' => $faker->semver(
                 'tables_included' => $faker->randomElements(['users', 'posts', 'comments', 'orders', 'products'], $this->faker->numberBetween(1, 5
-                'tables_excluded' => $faker->optional(
+                'tables_excluded' => $faker->optional()
             ],
             'settings' => [
                 'include_structure' => true,
@@ -60,7 +60,7 @@ class DbForgeBackupFactory extends Factory
                 'include_functions' => $faker->boolean(70
                 'include_events' => $faker->boolean(60
                 'single_transaction' => $faker->boolean(80
-                'lock_tables' => $faker->boolean(40
+                'lock_tables' => $faker->boolean(40)
             ],
         ];
     }
@@ -94,7 +94,7 @@ class DbForgeBackupFactory extends Factory
     {
         return $this->state(fn (array $attributes
             'status' => 'completed',
-            'completed_at' => $faker->dateTimeBetween('-1 month', 'now'
+            'completed_at' => $faker->dateTimeBetween('-1 month', 'now')
         ]);
     }
 
@@ -105,7 +105,7 @@ class DbForgeBackupFactory extends Factory
     {
         return $this->state(fn (array $attributes
             'status' => 'failed',
-            'completed_at' => $faker->dateTimeBetween('-1 month', 'now'
+            'completed_at' => $faker->dateTimeBetween('-1 month', 'now')
         ]);
     }
 
@@ -173,7 +173,7 @@ class DbForgeBackupFactory extends Factory
                 'backup_size' => $faker->numberBetween(1 * 1024 * 1024, 50 * 1024 * 1024
                 'metadata' => array_merge($existingMetadata, [
                     'tables_included' => $faker->randomElements(['users', 'posts', 'comments'], $this->faker->numberBetween(1, 3
-                    'tables_excluded' => $faker->randomElements(['logs', 'temp_data', 'cache', 'sessions'], $this->faker->numberBetween(1, 4
+                    'tables_excluded' => $faker->randomElements(['logs', 'temp_data', 'cache', 'sessions'], $this->faker->numberBetween(1, 4))
                 ]),
             ];
         });
@@ -253,7 +253,7 @@ class DbForgeBackupFactory extends Factory
             return [
                 'metadata' => array_merge($existingMetadata, [
                     'compression' => $faker->randomElement(['gzip', 'bzip2', 'lz4']
-                    'compression_ratio' => $faker->randomFloat(2, 0.3, 0.8
+                    'compression_ratio' => $faker->randomFloat(2, 0.3, 0.8)
                 ]),
             ];
         });
@@ -272,7 +272,7 @@ class DbForgeBackupFactory extends Factory
                 'metadata' => array_merge($existingMetadata, [
                     'encryption' => true,
                     'encryption_algorithm' => $faker->randomElement(['AES-256', 'ChaCha20', 'Twofish']
-                    'encryption_key_id' => $faker->uuid(
+                    'encryption_key_id' => $faker->uuid()
                 ]),
             ];
         });
@@ -291,7 +291,7 @@ class DbForgeBackupFactory extends Factory
                 'backup_size' => $faker->numberBetween(1024 * 1024 * 1024, 10 * 1024 * 1024 * 1024
                 'metadata' => array_merge($existingMetadata, [
                     'estimated_time' => $faker->numberBetween(300, 3600
-                    'parallel_jobs' => $faker->numberBetween(2, 8
+                    'parallel_jobs' => $faker->numberBetween(2, 8)
                 ]),
             ];
         });

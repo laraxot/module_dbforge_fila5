@@ -81,7 +81,7 @@ class DbForgeQueryLogFactory extends Factory
                 'filesort_used' => $faker->optional(
                 'full_scan' => $faker->optional(
                 'index_used' => $faker->optional(
-                'explain_plan' => $faker->optional(
+                'explain_plan' => $faker->optional()
             ],
             'settings' => [
                 'log_slow_queries' => $faker->boolean(80
@@ -91,7 +91,7 @@ class DbForgeQueryLogFactory extends Factory
                 'max_log_size' => $faker->numberBetween(1048576, 104857600
                 'retention_days' => $faker->numberBetween(7, 365
                 'compress_logs' => $faker->boolean(70
-                'encrypt_logs' => $faker->boolean(30
+                'encrypt_logs' => $faker->boolean(30)
             ],
         ];
     }
@@ -116,7 +116,7 @@ class DbForgeQueryLogFactory extends Factory
         return $this->state(fn (array $attributes
             'status' => 'error',
             'error_message' => $faker->sentence(
-            'error_code' => $faker->numberBetween(1000, 9999
+            'error_code' => $faker->numberBetween(1000, 9999)
         ]);
     }
 
@@ -154,7 +154,7 @@ class DbForgeQueryLogFactory extends Factory
         return $this->state(fn (array $attributes
             'status' => 'warning',
             'error_message' => $faker->sentence(
-            'error_code' => $faker->numberBetween(1000, 1999
+            'error_code' => $faker->numberBetween(1000, 1999)
         ]);
     }
 
@@ -172,7 +172,7 @@ class DbForgeQueryLogFactory extends Factory
                 'SELECT * FROM products WHERE category_id = ? ORDER BY created_at DESC LIMIT ?',
             ]),
             'rows_affected' => null,
-            'rows_returned' => $faker->numberBetween(0, 10000
+            'rows_returned' => $faker->numberBetween(0, 10000)
         ]);
     }
 
@@ -269,7 +269,7 @@ class DbForgeQueryLogFactory extends Factory
         return $this->state(fn (array $attributes
             'execution_time' => $faker->numberBetween(1, 100
             'memory_usage' => $faker->numberBetween(1024, 10240
-            'cpu_usage' => $faker->numberBetween(1, 20
+            'cpu_usage' => $faker->numberBetween(1, 20)
         ]);
     }
 
@@ -281,7 +281,7 @@ class DbForgeQueryLogFactory extends Factory
         return $this->state(fn (array $attributes
             'execution_time' => $faker->numberBetween(5000, 30000
             'memory_usage' => $faker->numberBetween(1048576, 10485760
-            'cpu_usage' => $faker->numberBetween(50, 100
+            'cpu_usage' => $faker->numberBetween(50, 100)
         ]);
     }
 
@@ -292,7 +292,7 @@ class DbForgeQueryLogFactory extends Factory
     {
         return $this->state(fn (array $attributes
             'rows_affected' => $faker->numberBetween(1000, 10000
-            'rows_returned' => $faker->numberBetween(1000, 10000
+            'rows_returned' => $faker->numberBetween(1000, 10000)
         ]);
     }
 
@@ -303,7 +303,7 @@ class DbForgeQueryLogFactory extends Factory
     {
         return $this->state(fn (array $attributes
             'rows_affected' => $faker->numberBetween(0, 10
-            'rows_returned' => $faker->numberBetween(0, 10
+            'rows_returned' => $faker->numberBetween(0, 10)
         ]);
     }
 
@@ -314,7 +314,7 @@ class DbForgeQueryLogFactory extends Factory
     {
         return $this->state(fn (array $attributes
             'memory_usage' => $faker->numberBetween(10485760, 104857600
-            'cpu_usage' => $faker->numberBetween(70, 100
+            'cpu_usage' => $faker->numberBetween(70, 100)
         ]);
     }
 
@@ -325,7 +325,7 @@ class DbForgeQueryLogFactory extends Factory
     {
         return $this->state(fn (array $attributes
             'memory_usage' => $faker->numberBetween(1024, 10240
-            'cpu_usage' => $faker->numberBetween(1, 30
+            'cpu_usage' => $faker->numberBetween(1, 30)
         ]);
     }
 
@@ -381,7 +381,7 @@ class DbForgeQueryLogFactory extends Factory
             return [
                 'metadata' => array_merge($existingMetadata, [
                     'is_transaction' => true,
-                    'transaction_id' => $faker->uuid(
+                    'transaction_id' => $faker->uuid()
                 ]),
             ];
         });

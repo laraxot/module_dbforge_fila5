@@ -53,14 +53,14 @@ class DbForgeMigrationFactory extends Factory
                 'description' => $faker->sentence(
                 'version' => $faker->semver(
                 'dependencies' => $faker->optional(
-                'checksum' => $faker->sha1(
+                'checksum' => $faker->sha1()
             ],
             'settings' => [
                 'run_in_background' => $faker->boolean(20
                 'force_execution' => $faker->boolean(10
                 'skip_transactions' => $faker->boolean(5
                 'batch_size' => $faker->numberBetween(100, 1000
-                'timeout_seconds' => $faker->numberBetween(30, 300
+                'timeout_seconds' => $faker->numberBetween(30, 300)
             ],
         ];
     }
@@ -94,7 +94,7 @@ class DbForgeMigrationFactory extends Factory
     {
         return $this->state(fn (array $attributes
             'status' => 'completed',
-            'executed_at' => $faker->dateTimeBetween('-1 month', 'now'
+            'executed_at' => $faker->dateTimeBetween('-1 month', 'now')
         ]);
     }
 
@@ -105,7 +105,7 @@ class DbForgeMigrationFactory extends Factory
     {
         return $this->state(fn (array $attributes
             'status' => 'failed',
-            'executed_at' => $faker->dateTimeBetween('-1 month', 'now'
+            'executed_at' => $faker->dateTimeBetween('-1 month', 'now')
         ]);
     }
 
@@ -153,7 +153,7 @@ class DbForgeMigrationFactory extends Factory
                 'migration_type' => 'update',
                 'metadata' => array_merge($existingMetadata, [
                     'table_name' => $faker->word(
-                    'columns_to_update' => $faker->randomElements(['name', 'email', 'status', 'type'], $this->faker->numberBetween(1, 3
+                    'columns_to_update' => $faker->randomElements(['name', 'email', 'status', 'type'], $this->faker->numberBetween(1, 3))
                 ]),
             ];
         });
@@ -174,7 +174,7 @@ class DbForgeMigrationFactory extends Factory
                     'table_name' => $faker->word(
                     'conditions' => [
                         'status' => 'inactive',
-                        'created_at' => '< '.$faker->date('Y-m-d'
+                        'created_at' => '< '.$faker->date('Y-m-d')
                     ],
                 ]),
             ];
@@ -195,7 +195,7 @@ class DbForgeMigrationFactory extends Factory
                 'metadata' => array_merge($existingMetadata, [
                     'table_name' => $faker->word(
                     'columns_to_modify' => $faker->randomElements(['name', 'email', 'status', 'type'], $this->faker->numberBetween(1, 3
-                    'new_columns' => $faker->randomElements(['created_by', 'updated_by', 'deleted_at'], $this->faker->numberBetween(0, 2
+                    'new_columns' => $faker->randomElements(['created_by', 'updated_by', 'deleted_at'], $this->faker->numberBetween(0, 2))
                 ]),
             ];
         });
@@ -215,7 +215,7 @@ class DbForgeMigrationFactory extends Factory
                 'metadata' => array_merge($existingMetadata, [
                     'table_name' => $faker->word(
                     'seed_count' => $faker->numberBetween(10, 1000
-                    'seed_type' => $faker->randomElement(['random', 'sequential', 'weighted']
+                    'seed_type' => $faker->randomElement(['random', 'sequential', 'weighted'])
                 ]),
             ];
         });

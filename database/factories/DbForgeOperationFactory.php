@@ -56,7 +56,7 @@ class DbForgeOperationFactory extends Factory
             'status' => $faker->randomElement(['pending', 'running', 'completed', 'failed']
             'error_message' => $faker->optional(
             'created_by' => $faker->optional(
-            'completed_at' => $faker->optional(
+            'completed_at' => $faker->optional()
         ];
     }
 
@@ -104,7 +104,7 @@ class DbForgeOperationFactory extends Factory
         return $this->state(fn (array $attributes
             'status' => 'failed',
             'completed_at' => $faker->dateTimeBetween('-1 month', 'now'
-            'error_message' => $faker->sentence(
+            'error_message' => $faker->sentence()
         ]);
     }
 
@@ -193,7 +193,7 @@ class DbForgeOperationFactory extends Factory
                 'index_name' => $faker->word(
                 'index_type' => $faker->randomElement(['btree', 'hash', 'fulltext']
                 'columns' => $faker->randomElements(['id', 'name', 'email', 'created_at'], $this->faker->numberBetween(1, 3
-                'unique' => $faker->boolean(30
+                'unique' => $faker->boolean(30)
             ],
         ]);
     }
@@ -210,7 +210,7 @@ class DbForgeOperationFactory extends Factory
                 'include_data' => $faker->boolean(80
                 'include_structure' => true,
                 'compression' => $faker->randomElement(['none', 'gzip', 'bzip2']
-                'backup_path' => '/backups/tables/'.$faker->date('Y-m-d'
+                'backup_path' => '/backups/tables/'.$faker->date('Y-m-d')
             ],
         ]);
     }
@@ -257,7 +257,7 @@ class DbForgeOperationFactory extends Factory
             'operation_data' => [
                 'update_statistics' => true,
                 'sample_percentage' => $faker->numberBetween(10, 100
-                'parallel' => $faker->boolean(30
+                'parallel' => $faker->boolean(30)
             ],
         ]);
     }

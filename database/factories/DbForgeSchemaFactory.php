@@ -116,7 +116,7 @@ class DbForgeSchemaFactory extends Factory
                 'relminmxid' => $faker->optional(
                 'relacl' => $faker->optional(
                 'reloptions' => $faker->optional(
-                'relpartbound_expr' => $faker->optional(
+                'relpartbound_expr' => $faker->optional()
             ],
             'settings' => [
                 'auto_increment_increment' => $faker->optional(
@@ -145,7 +145,7 @@ class DbForgeSchemaFactory extends Factory
                 'version' => $faker->optional(
                 'is_active' => $faker->optional(
                 'last_analyzed' => $faker->optional(
-                'last_optimized' => $faker->optional(
+                'last_optimized' => $faker->optional()
             ],
         ];
     }
@@ -179,7 +179,7 @@ class DbForgeSchemaFactory extends Factory
             'table_rows' => $faker->numberBetween(100000, 10000000
             'avg_row_length' => $faker->numberBetween(5000, 50000
             'data_length' => $faker->numberBetween(1073741824, 10737418240
-            'index_length' => $faker->numberBetween(536870912, 2147483648
+            'index_length' => $faker->numberBetween(536870912, 2147483648)
         ]);
     }
 
@@ -192,7 +192,7 @@ class DbForgeSchemaFactory extends Factory
             'table_rows' => $faker->numberBetween(0, 1000
             'avg_row_length' => $faker->numberBetween(100, 1000
             'data_length' => $faker->numberBetween(1024, 1048576
-            'index_length' => $faker->numberBetween(1024, 1048576
+            'index_length' => $faker->numberBetween(1024, 1048576)
         ]);
     }
 
@@ -208,7 +208,7 @@ class DbForgeSchemaFactory extends Factory
             return [
                 'metadata' => array_merge($existingMetadata, [
                     'partitioned' => true,
-                    'partition_count' => $faker->numberBetween(2, 16
+                    'partition_count' => $faker->numberBetween(2, 16)
                 ]),
             ];
         });
@@ -243,7 +243,7 @@ class DbForgeSchemaFactory extends Factory
 
             return [
                 'metadata' => array_merge($existingMetadata, [
-                    'compression' => $faker->randomElement(['ZLIB', 'LZ4', 'ZSTD']
+                    'compression' => $faker->randomElement(['ZLIB', 'LZ4', 'ZSTD'])
                 ]),
             ];
         });
@@ -347,7 +347,7 @@ class DbForgeSchemaFactory extends Factory
 
             return [
                 'metadata' => array_merge($existingMetadata, [
-                    'columns_count' => $faker->numberBetween(20, 100
+                    'columns_count' => $faker->numberBetween(20, 100)
                 ]),
             ];
         });
@@ -364,7 +364,7 @@ class DbForgeSchemaFactory extends Factory
 
             return [
                 'metadata' => array_merge($existingMetadata, [
-                    'columns_count' => $faker->numberBetween(3, 10
+                    'columns_count' => $faker->numberBetween(3, 10)
                 ]),
             ];
         });
@@ -381,7 +381,7 @@ class DbForgeSchemaFactory extends Factory
 
             return [
                 'metadata' => array_merge($existingMetadata, [
-                    'indexes_count' => $faker->numberBetween(10, 30
+                    'indexes_count' => $faker->numberBetween(10, 30)
                 ]),
             ];
         });
@@ -398,7 +398,7 @@ class DbForgeSchemaFactory extends Factory
 
             return [
                 'metadata' => array_merge($existingMetadata, [
-                    'indexes_count' => $faker->numberBetween(1, 5
+                    'indexes_count' => $faker->numberBetween(1, 5)
                 ]),
             ];
         });
@@ -416,7 +416,7 @@ class DbForgeSchemaFactory extends Factory
             return [
                 'metadata' => array_merge($existingMetadata, [
                     'relhasforeignkeys' => true,
-                    'foreign_keys_count' => $faker->numberBetween(1, 10
+                    'foreign_keys_count' => $faker->numberBetween(1, 10)
                 ]),
             ];
         });
@@ -452,7 +452,7 @@ class DbForgeSchemaFactory extends Factory
             return [
                 'metadata' => array_merge($existingMetadata, [
                     'relhastriggers' => true,
-                    'triggers_count' => $faker->numberBetween(1, 5
+                    'triggers_count' => $faker->numberBetween(1, 5)
                 ]),
             ];
         });
@@ -592,7 +592,7 @@ class DbForgeSchemaFactory extends Factory
     public function recentlyCreated(): static
     {
         return $this->state(fn (array $attributes
-            'create_time' => $faker->dateTimeBetween('-1 month', 'now'
+            'create_time' => $faker->dateTimeBetween('-1 month', 'now')
         ]);
     }
 
@@ -602,7 +602,7 @@ class DbForgeSchemaFactory extends Factory
     public function old(): static
     {
         return $this->state(fn (array $attributes
-            'create_time' => $faker->dateTimeBetween('-5 years', '-2 years'
+            'create_time' => $faker->dateTimeBetween('-5 years', '-2 years')
         ]);
     }
 
@@ -612,7 +612,7 @@ class DbForgeSchemaFactory extends Factory
     public function recentlyUpdated(): static
     {
         return $this->state(fn (array $attributes
-            'update_time' => $faker->dateTimeBetween('-1 month', 'now'
+            'update_time' => $faker->dateTimeBetween('-1 month', 'now')
         ]);
     }
 
@@ -622,7 +622,7 @@ class DbForgeSchemaFactory extends Factory
     public function recentlyAnalyzed(): static
     {
         return $this->state(fn (array $attributes
-            'last_analyzed' => $faker->dateTimeBetween('-1 month', 'now'
+            'last_analyzed' => $faker->dateTimeBetween('-1 month', 'now')
         ]);
     }
 
@@ -632,7 +632,7 @@ class DbForgeSchemaFactory extends Factory
     public function recentlyOptimized(): static
     {
         return $this->state(fn (array $attributes
-            'last_optimized' => $faker->dateTimeBetween('-1 month', 'now'
+            'last_optimized' => $faker->dateTimeBetween('-1 month', 'now')
         ]);
     }
 }
