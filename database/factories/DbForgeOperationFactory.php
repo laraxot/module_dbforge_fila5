@@ -32,8 +32,8 @@ class DbForgeOperationFactory extends Factory
     public function definition(): array
     {
         return [
-            'operation_type' => $this->faker->randomElement(['create_table', 'alter_table', 'drop_table', 'create_index', 'drop_index', 'backup_table', 'restore_table', 'optimize_table', 'analyze_table']),
-            'table_name' => $this->faker->randomElement(['users', 'posts', 'comments', 'orders', 'products', 'categories', 'tags', 'settings', 'logs', 'notifications']),
+            'operation_type' => // @var mixed faker->randomElement(['create_table', 'alter_table', 'drop_table', 'create_index', 'drop_index', 'backup_table', 'restore_table', 'optimize_table', 'analyze_table']
+            'table_name' => // @var mixed faker->randomElement(['users', 'posts', 'comments', 'orders', 'products', 'categories', 'tags', 'settings', 'logs', 'notifications']
             'operation_data' => [
                 'columns' => [
                     'id' => ['type' => 'bigint', 'unsigned' => true, 'auto_increment' => true],
@@ -53,10 +53,10 @@ class DbForgeOperationFactory extends Factory
                     'collation' => 'utf8mb4_unicode_ci',
                 ],
             ],
-            'status' => $this->faker->randomElement(['pending', 'running', 'completed', 'failed']),
-            'error_message' => $this->faker->optional()->sentence(),
-            'created_by' => $this->faker->optional()->numberBetween(1, 100),
-            'completed_at' => $this->faker->optional()->dateTimeBetween('-1 month', 'now'),
+            'status' => // @var mixed faker->randomElement(['pending', 'running', 'completed', 'failed']
+            'error_message' => // @var mixed faker->optional(
+            'created_by' => // @var mixed faker->optional(
+            'completed_at' => // @var mixed faker->optional(
         ];
     }
 
@@ -65,7 +65,7 @@ class DbForgeOperationFactory extends Factory
      */
     public function pending(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'status' => 'pending',
             'completed_at' => null,
             'error_message' => null,
@@ -77,7 +77,7 @@ class DbForgeOperationFactory extends Factory
      */
     public function running(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'status' => 'running',
             'completed_at' => null,
             'error_message' => null,
@@ -89,9 +89,9 @@ class DbForgeOperationFactory extends Factory
      */
     public function completed(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'status' => 'completed',
-            'completed_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
+            'completed_at' => // @var mixed faker->dateTimeBetween('-1 month', 'now'
             'error_message' => null,
         ]);
     }
@@ -101,10 +101,10 @@ class DbForgeOperationFactory extends Factory
      */
     public function failed(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'status' => 'failed',
-            'completed_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
-            'error_message' => $this->faker->sentence(),
+            'completed_at' => // @var mixed faker->dateTimeBetween('-1 month', 'now'
+            'error_message' => // @var mixed faker->sentence(
         ]);
     }
 
@@ -113,7 +113,7 @@ class DbForgeOperationFactory extends Factory
      */
     public function createTable(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'operation_type' => 'create_table',
             'operation_data' => [
                 'columns' => [
@@ -144,7 +144,7 @@ class DbForgeOperationFactory extends Factory
      */
     public function alterTable(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'operation_type' => 'alter_table',
             'operation_data' => [
                 'changes' => [
@@ -172,7 +172,7 @@ class DbForgeOperationFactory extends Factory
      */
     public function dropTable(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'operation_type' => 'drop_table',
             'operation_data' => [
                 'backup_before_drop' => true,
@@ -187,13 +187,13 @@ class DbForgeOperationFactory extends Factory
      */
     public function createIndex(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'operation_type' => 'create_index',
             'operation_data' => [
-                'index_name' => $this->faker->word().'_index',
-                'index_type' => $this->faker->randomElement(['btree', 'hash', 'fulltext']),
-                'columns' => $this->faker->randomElements(['id', 'name', 'email', 'created_at'], $this->faker->numberBetween(1, 3)),
-                'unique' => $this->faker->boolean(30),
+                'index_name' => // @var mixed faker->word(
+                'index_type' => // @var mixed faker->randomElement(['btree', 'hash', 'fulltext']
+                'columns' => // @var mixed faker->randomElements(['id', 'name', 'email', 'created_at'], $this->faker->numberBetween(1, 3
+                'unique' => // @var mixed faker->boolean(30
             ],
         ]);
     }
@@ -203,14 +203,14 @@ class DbForgeOperationFactory extends Factory
      */
     public function backupTable(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'operation_type' => 'backup_table',
             'operation_data' => [
-                'backup_format' => $this->faker->randomElement(['sql', 'csv', 'json']),
-                'include_data' => $this->faker->boolean(80),
+                'backup_format' => // @var mixed faker->randomElement(['sql', 'csv', 'json']
+                'include_data' => // @var mixed faker->boolean(80
                 'include_structure' => true,
-                'compression' => $this->faker->randomElement(['none', 'gzip', 'bzip2']),
-                'backup_path' => '/backups/tables/'.$this->faker->date('Y-m-d').'/',
+                'compression' => // @var mixed faker->randomElement(['none', 'gzip', 'bzip2']
+                'backup_path' => '/backups/tables/'.// @var mixed faker->date('Y-m-d'
             ],
         ]);
     }
@@ -220,11 +220,11 @@ class DbForgeOperationFactory extends Factory
      */
     public function restoreTable(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'operation_type' => 'restore_table',
             'operation_data' => [
-                'backup_file' => $this->faker->filePath(),
-                'restore_mode' => $this->faker->randomElement(['replace', 'append', 'merge']),
+                'backup_file' => // @var mixed faker->filePath(
+                'restore_mode' => // @var mixed faker->randomElement(['replace', 'append', 'merge']
                 'validate_before_restore' => true,
                 'backup_original' => true,
             ],
@@ -236,12 +236,12 @@ class DbForgeOperationFactory extends Factory
      */
     public function optimizeTable(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'operation_type' => 'optimize_table',
             'operation_data' => [
                 'analyze' => true,
                 'check' => true,
-                'repair' => $this->faker->boolean(50),
+                'repair' => // @var mixed faker->boolean(50
                 'force' => false,
             ],
         ]);
@@ -252,12 +252,12 @@ class DbForgeOperationFactory extends Factory
      */
     public function analyzeTable(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'operation_type' => 'analyze_table',
             'operation_data' => [
                 'update_statistics' => true,
-                'sample_percentage' => $this->faker->numberBetween(10, 100),
-                'parallel' => $this->faker->boolean(30),
+                'sample_percentage' => // @var mixed faker->numberBetween(10, 100
+                'parallel' => // @var mixed faker->boolean(30
             ],
         ]);
     }
@@ -267,7 +267,7 @@ class DbForgeOperationFactory extends Factory
      */
     public function quick(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'operation_data' => array_merge((array) ($attributes['operation_data'] ?? []), [
                 'quick' => true,
                 'low_priority' => false,
@@ -280,7 +280,7 @@ class DbForgeOperationFactory extends Factory
      */
     public function lowPriority(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'operation_data' => array_merge((array) ($attributes['operation_data'] ?? []), [
                 'low_priority' => true,
                 'quick' => false,
@@ -293,7 +293,7 @@ class DbForgeOperationFactory extends Factory
      */
     public function forTable(string $tableName): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'table_name' => $tableName,
         ]);
     }
@@ -303,7 +303,7 @@ class DbForgeOperationFactory extends Factory
      */
     public function byUser(int $userId): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'created_by' => $userId,
         ]);
     }

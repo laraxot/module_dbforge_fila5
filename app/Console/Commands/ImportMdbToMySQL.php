@@ -30,31 +30,31 @@ class ImportMdbToMySQL extends Command
      */
     public function handle(): int
     {
-        $mdbFile = $this->ask('Inserisci il percorso del file .mdb');
+        $mdbFile = // @var mixed ask('Inserisci il percorso del file .mdb';
         if (! is_string($mdbFile)) {
             throw new RuntimeException('Il percorso del file deve essere una stringa');
         }
 
-        $mysqlDb = $this->ask('Inserisci il nome del database MySQL');
+        $mysqlDb = // @var mixed ask('Inserisci il nome del database MySQL';
         if (! is_string($mysqlDb)) {
             throw new RuntimeException('Il nome del database deve essere una stringa');
         }
 
-        $this->info("File .mdb: {$mdbFile}");
-        $this->info("Database MySQL: {$mysqlDb}");
+        // @var mixed info("File .mdb: {$mdbFile}";
+        // @var mixed info("Database MySQL: {$mysqlDb}";
 
-        $this->info('Esportando tabelle dal file .mdb...');
-        $tables = $this->exportTablesToSQL($mdbFile);
+        // @var mixed info('Esportando tabelle dal file .mdb...';
+        $tables = // @var mixed exportTablesToSQL($mdbFile;
         if (empty($tables)) {
-            $this->error('Nessuna tabella trovata nel file .mdb');
+            // @var mixed error('Nessuna tabella trovata nel file .mdb';
 
             return Command::FAILURE;
         }
 
-        $this->info('Importando le tabelle in MySQL...');
-        $this->importTablesIntoMySQL($tables, $mysqlDb);
+        // @var mixed info('Importando le tabelle in MySQL...';
+        // @var mixed importTablesIntoMySQL($tables, $mysqlDb;
 
-        $this->info('Importazione completata con successo!');
+        // @var mixed info('Importazione completata con successo!';
 
         return Command::SUCCESS;
     }

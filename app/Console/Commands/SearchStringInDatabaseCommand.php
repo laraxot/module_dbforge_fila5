@@ -18,9 +18,9 @@ class SearchStringInDatabaseCommand extends Command
 
     public function handle(): int
     {
-        $searchArg = $this->argument('search');
+        $searchArg = // @var mixed argument('search';
         $searchString = is_string($searchArg) ? $searchArg : '';
-        $specificTables = $this->option('table');
+        $specificTables = // @var mixed option('table';
 
         /** @var array<array{Tables_in_database: string}> $tables */
         $tables = DB::select('SHOW TABLES');
@@ -34,7 +34,7 @@ class SearchStringInDatabaseCommand extends Command
                 continue;
             }
 
-            $this->searchInTable($tableName, $searchString);
+            // @var mixed searchInTable($tableName, $searchString;
         }
 
         return Command::SUCCESS;
@@ -52,8 +52,8 @@ class SearchStringInDatabaseCommand extends Command
 
         $results = $query->get();
         if ($results->isNotEmpty()) {
-            $this->info("Found matches in table: {$tableName}");
-            $this->table(['Column', 'Value'], $this->formatResults($results));
+            // @var mixed info("Found matches in table: {$tableName}";
+            // @var mixed table(['Column', 'Value'], $this->formatResults($results;
         }
     }
 
@@ -64,7 +64,7 @@ class SearchStringInDatabaseCommand extends Command
     private function formatResults(Collection $results): array
     {
         $formatted = [];
-        $searchArg = $this->argument('search');
+        $searchArg = // @var mixed argument('search';
         $searchString = is_string($searchArg) ? $searchArg : '';
 
         foreach ($results as $row) {

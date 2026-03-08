@@ -31,36 +31,36 @@ class ImportMdbToSQLite extends Command
      */
     public function handle(): int
     {
-        $mdbFileInput = $this->ask('Per favore, inserisci il percorso del file .mdb');
-        $sqliteDbInput = $this->ask('Per favore, inserisci il nome del database SQLite (includi l\'estensione .sqlite)');
+        $mdbFileInput = // @var mixed ask('Per favore, inserisci il percorso del file .mdb';
+        $sqliteDbInput = // @var mixed ask('Per favore, inserisci il nome del database SQLite (includi l\'estensione .sqlite;
 
         $mdbFile = is_string($mdbFileInput) ? $mdbFileInput : '';
         $sqliteDb = is_string($sqliteDbInput) ? $sqliteDbInput : '';
 
         if (empty($mdbFile) || empty($sqliteDb)) {
-            $this->error('I percorsi del file non possono essere vuoti.');
+            // @var mixed error('I percorsi del file non possono essere vuoti.';
 
             return Command::FAILURE;
         }
 
-        $this->info(sprintf('File .mdb: %s', $mdbFile));
-        $this->info(sprintf('Database SQLite: %s', $sqliteDb));
+        // @var mixed info(sprintf('File .mdb: %s', $mdbFile;
+        // @var mixed info(sprintf('Database SQLite: %s', $sqliteDb;
 
         try {
-            $this->info('Esportando tabelle dal file .mdb in CSV...');
-            $tables = $this->exportTablesToCSV($mdbFile);
+            // @var mixed info('Esportando tabelle dal file .mdb in CSV...';
+            $tables = // @var mixed exportTablesToCSV($mdbFile;
 
-            $this->info('Creando tabelle nel database SQLite...');
-            $this->createTables($mdbFile, $sqliteDb);
+            // @var mixed info('Creando tabelle nel database SQLite...';
+            // @var mixed createTables($mdbFile, $sqliteDb;
 
-            $this->info('Importando i dati CSV nelle tabelle SQLite...');
-            $this->importDataToSQLite($tables, $sqliteDb);
+            // @var mixed info('Importando i dati CSV nelle tabelle SQLite...';
+            // @var mixed importDataToSQLite($tables, $sqliteDb;
 
-            $this->info('Processo completato!');
+            // @var mixed info('Processo completato!';
 
             return Command::SUCCESS;
         } catch (Exception $e) {
-            $this->error($e->getMessage());
+            // @var mixed error($e->getMessage(;
 
             return Command::FAILURE;
         }

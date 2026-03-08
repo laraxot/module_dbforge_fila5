@@ -40,7 +40,7 @@ class ListFilamentPanels extends Command
                     continue;
                 }
 
-                $this->info("Found panel in {$moduleName}: {$provider}");
+                // @var mixed info("Found panel in {$moduleName}: {$provider}";
             }
         }
 

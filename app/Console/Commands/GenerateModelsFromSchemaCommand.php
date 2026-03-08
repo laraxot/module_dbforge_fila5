@@ -82,16 +82,16 @@ class GenerateModelsFromSchemaCommand extends Command
      */
     public function handle(): int
     {
-        $formPathOption = $this->option('schema');
-        $outputPathOption = $this->option('output');
-        $namespaceOption = $this->option('namespace');
+        $formPathOption = // @var mixed option('schema';
+        $outputPathOption = // @var mixed option('output';
+        $namespaceOption = // @var mixed option('namespace';
 
         $formPath = is_string($formPathOption) ? $formPathOption : 'database/schema.json';
         $outputPath = is_string($outputPathOption) ? $outputPathOption : 'app/Models';
         $namespace = is_string($namespaceOption) ? $namespaceOption : 'App\\Models';
 
         if (! File::exists($formPath)) {
-            $this->error("Schema file not found: {$formPath}");
+            // @var mixed error("Schema file not found: {$formPath}";
 
             return 1;
         }
@@ -100,7 +100,7 @@ class GenerateModelsFromSchemaCommand extends Command
         $formDecoded = json_decode($formContent, true);
 
         if (! is_array($formDecoded)) {
-            $this->error('Invalid schema file format');
+            // @var mixed error('Invalid schema file format';
 
             return 1;
         }
@@ -113,12 +113,12 @@ class GenerateModelsFromSchemaCommand extends Command
             foreach ($formDecoded['tables'] as $tableName => $table) {
                 if (is_string($tableName) && is_array($table)) {
                     /** @var array<string, mixed> $table */
-                    $this->generateModel($tableName, $table, $outputPath, $namespace);
+                    // @var mixed generateModel($tableName, $table, $outputPath, $namespace;
                 }
             }
         }
 
-        $this->info('Models generated successfully!');
+        // @var mixed info('Models generated successfully!';
 
         return 0;
     }
@@ -133,18 +133,18 @@ class GenerateModelsFromSchemaCommand extends Command
      */
     protected function generateModel(string $tableName, array $table, string $outputPath, string $namespace): void
     {
-        $modelName = $this->getModelName($tableName);
+        $modelName = // @var mixed getModelName($tableName;
 
         /** @var array<string, array<string, mixed>> $columns */
         $columns = isset($table['columns']) && is_array($table['columns']) ? $table['columns'] : [];
         /** @var array<string, array<string, mixed>> $foreignKeys */
         $foreignKeys = isset($table['foreign_keys']) && is_array($table['foreign_keys']) ? $table['foreign_keys'] : [];
 
-        $fillable = $this->getFillableFields($columns);
-        $casts = $this->getCasts($columns);
-        $relations = $this->getRelations($foreignKeys);
+        $fillable = // @var mixed getFillableFields($columns;
+        $casts = // @var mixed getCasts($columns;
+        $relations = // @var mixed getRelations($foreignKeys;
 
-        $template = $this->getModelTemplate(
+        $template = // @var mixed getModelTemplate(
             $modelName,
             $namespace,
             $tableName,
@@ -156,7 +156,7 @@ class GenerateModelsFromSchemaCommand extends Command
         $filePath = $outputPath.'/'.$modelName.'.php';
         File::put($filePath, $template);
 
-        $this->info("Generated model: {$modelName}");
+        // @var mixed info("Generated model: {$modelName}";
     }
 
     /**
@@ -231,7 +231,7 @@ class GenerateModelsFromSchemaCommand extends Command
                 isset($fk['column']) && is_string($fk['column']) &&
                 isset($fk['references_column']) && is_string($fk['references_column'])) {
                 $relatedTable = $fk['references_table'];
-                $relatedModel = $this->getModelName((string) $relatedTable);
+                $relatedModel = // @var mixed getModelName((string;
                 $methodName = Str::camel((string) $relatedTable);
 
                 if (preg_match('/^(.+)_id$/', $fk['column'], $matches) === 1) {
@@ -285,7 +285,7 @@ class GenerateModelsFromSchemaCommand extends Command
 
         $relationsStr = '';
         foreach ($relations as $methodName => $relation) {
-            $relationsStr .= $this->getRelationMethod($methodName, $relation);
+            $relationsStr .= // @var mixed getRelationMethod($methodName, $relation;
         }
 
         return <<<PHP
@@ -305,7 +305,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read int \$id
  * @property \Carbon\Carbon \$created_at
  * @property \Carbon\Carbon \$updated_at
- * Generated on: {$this->getCurrentDate()}
+ * Generated on: {// @var mixed getCurrentDate(
  */
 class {$modelName} extends Model
 {
@@ -331,7 +331,7 @@ PHP;
 
     public function {$methodName}(): BelongsTo
     {
-        return \$this->belongsTo({$relation['model']}::class, '{$relation['key']}', '{$relation['foreignKey']}');
+        return \// @var mixed belongsTo({$relation['model']}::class, '{$relation['key']}', '{$relation['foreignKey']}';
     }
 PHP;
     }

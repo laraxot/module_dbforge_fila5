@@ -11,6 +11,6 @@ class DbForgeDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        // // @var mixed call([];
     }
 }

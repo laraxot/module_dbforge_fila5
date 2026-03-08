@@ -47,13 +47,13 @@ class CreateTableIndexByModelClassColumnsAction
         }
 
         // Validate the columns exist
-        $this->validateColumnsExist($connectionName, $tableName, $columns);
+        // @var mixed validateColumnsExist($connectionName, $tableName, $columns;
 
         // Generate a unique index name
-        $indexName = $this->generateIndexName($tableName, $columns);
+        $indexName = // @var mixed generateIndexName($tableName, $columns;
 
         // Check if the index already exists
-        if ($this->indexExists($connectionName, $tableName, $indexName)) {
+        if (// @var mixed indexExists($connectionName, $tableName, $indexName
             return false; // Skip creation as the index already exists
         }
 

@@ -29,38 +29,38 @@ class DbForgeBackupFactory extends Factory
     public function definition(): array
     {
         /** @var string $backupPrefix */
-        $backupPrefix = $this->faker->randomElement(['daily_backup', 'weekly_backup', 'monthly_backup', 'manual_backup', 'emergency_backup', 'migration_backup', 'table_backup', 'schema_backup']);
+        $backupPrefix = // @var mixed faker->randomElement(['daily_backup', 'weekly_backup', 'monthly_backup', 'manual_backup', 'emergency_backup', 'migration_backup', 'table_backup', 'schema_backup'];
         $dateTime = date('Y-m-d_H-i-s');
         $dateMonth = date('Y/m');
         /** @var string $word */
-        $word = $this->faker->word();
+        $word = // @var mixed faker->word(;
 
         return [
             'backup_name' => $backupPrefix.'_'.$dateTime,
             'backup_path' => '/backups/database/'.$dateMonth.'/'.$dateTime.'_'.($word !== '' ? $word : 'backup').'.sql',
-            'backup_size' => $this->faker->numberBetween(1024 * 1024, 1024 * 1024 * 1024), // 1MB to 1GB
-            'backup_type' => $this->faker->randomElement(['full', 'incremental', 'selective']),
-            'status' => $this->faker->randomElement(['pending', 'running', 'completed', 'failed']),
-            'retention_days' => $this->faker->randomElement([7, 14, 30, 60, 90, 180, 365]),
-            'created_by' => $this->faker->optional()->numberBetween(1, 100),
-            'completed_at' => $this->faker->optional()->dateTimeBetween('-1 month', 'now'),
+            'backup_size' => // @var mixed faker->numberBetween(1024 * 1024, 1024 * 1024 * 1024
+            'backup_type' => // @var mixed faker->randomElement(['full', 'incremental', 'selective']
+            'status' => // @var mixed faker->randomElement(['pending', 'running', 'completed', 'failed']
+            'retention_days' => // @var mixed faker->randomElement([7, 14, 30, 60, 90, 180, 365]
+            'created_by' => // @var mixed faker->optional(
+            'completed_at' => // @var mixed faker->optional(
             'metadata' => [
-                'compression' => $this->faker->randomElement(['none', 'gzip', 'bzip2', 'lz4']),
-                'encryption' => $this->faker->boolean(20),
-                'checksum' => $this->faker->sha1(),
-                'version' => $this->faker->semver(),
-                'tables_included' => $this->faker->randomElements(['users', 'posts', 'comments', 'orders', 'products'], $this->faker->numberBetween(1, 5)),
-                'tables_excluded' => $this->faker->optional()->randomElements(['logs', 'temp_data', 'cache'], $this->faker->numberBetween(0, 3)),
+                'compression' => // @var mixed faker->randomElement(['none', 'gzip', 'bzip2', 'lz4']
+                'encryption' => // @var mixed faker->boolean(20
+                'checksum' => // @var mixed faker->sha1(
+                'version' => // @var mixed faker->semver(
+                'tables_included' => // @var mixed faker->randomElements(['users', 'posts', 'comments', 'orders', 'products'], $this->faker->numberBetween(1, 5
+                'tables_excluded' => // @var mixed faker->optional(
             ],
             'settings' => [
                 'include_structure' => true,
-                'include_data' => $this->faker->boolean(90),
-                'include_triggers' => $this->faker->boolean(80),
-                'include_procedures' => $this->faker->boolean(70),
-                'include_functions' => $this->faker->boolean(70),
-                'include_events' => $this->faker->boolean(60),
-                'single_transaction' => $this->faker->boolean(80),
-                'lock_tables' => $this->faker->boolean(40),
+                'include_data' => // @var mixed faker->boolean(90
+                'include_triggers' => // @var mixed faker->boolean(80
+                'include_procedures' => // @var mixed faker->boolean(70
+                'include_functions' => // @var mixed faker->boolean(70
+                'include_events' => // @var mixed faker->boolean(60
+                'single_transaction' => // @var mixed faker->boolean(80
+                'lock_tables' => // @var mixed faker->boolean(40
             ],
         ];
     }
@@ -70,7 +70,7 @@ class DbForgeBackupFactory extends Factory
      */
     public function pending(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'status' => 'pending',
             'completed_at' => null,
         ]);
@@ -81,7 +81,7 @@ class DbForgeBackupFactory extends Factory
      */
     public function running(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'status' => 'running',
             'completed_at' => null,
         ]);
@@ -92,9 +92,9 @@ class DbForgeBackupFactory extends Factory
      */
     public function completed(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'status' => 'completed',
-            'completed_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
+            'completed_at' => // @var mixed faker->dateTimeBetween('-1 month', 'now'
         ]);
     }
 
@@ -103,9 +103,9 @@ class DbForgeBackupFactory extends Factory
      */
     public function failed(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'status' => 'failed',
-            'completed_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
+            'completed_at' => // @var mixed faker->dateTimeBetween('-1 month', 'now'
         ]);
     }
 
@@ -114,13 +114,13 @@ class DbForgeBackupFactory extends Factory
      */
     public function full(): static
     {
-        return $this->state(function (array $attributes): array {
+        return // @var mixed state(function (array $attributes
             /** @var array<string, mixed> $existingSettings */
             $existingSettings = is_array($attributes['settings'] ?? null) ? $attributes['settings'] : [];
 
             return [
                 'backup_type' => 'full',
-                'backup_size' => $this->faker->numberBetween(100 * 1024 * 1024, 1024 * 1024 * 1024), // 100MB to 1GB
+                'backup_size' => // @var mixed faker->numberBetween(100 * 1024 * 1024, 1024 * 1024 * 1024
                 'settings' => array_merge(
                     $existingSettings,
                     [
@@ -141,18 +141,18 @@ class DbForgeBackupFactory extends Factory
      */
     public function incremental(): static
     {
-        return $this->state(function (array $attributes): array {
+        return // @var mixed state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
                 'backup_type' => 'incremental',
-                'backup_size' => $this->faker->numberBetween(10 * 1024 * 1024, 100 * 1024 * 1024), // 10MB to 100MB
+                'backup_size' => // @var mixed faker->numberBetween(10 * 1024 * 1024, 100 * 1024 * 1024
                 'metadata' => array_merge(
                     $existingMetadata,
                     [
-                        'base_backup_id' => $this->faker->numberBetween(1, 1000),
-                        'incremental_since' => $this->faker->dateTimeBetween('-1 week', 'now'),
+                        'base_backup_id' => // @var mixed faker->numberBetween(1, 1000
+                        'incremental_since' => // @var mixed faker->dateTimeBetween('-1 week', 'now'
                     ]
                 ),
             ];
@@ -164,16 +164,16 @@ class DbForgeBackupFactory extends Factory
      */
     public function selective(): static
     {
-        return $this->state(function (array $attributes): array {
+        return // @var mixed state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
                 'backup_type' => 'selective',
-                'backup_size' => $this->faker->numberBetween(1 * 1024 * 1024, 50 * 1024 * 1024), // 1MB to 50MB
+                'backup_size' => // @var mixed faker->numberBetween(1 * 1024 * 1024, 50 * 1024 * 1024
                 'metadata' => array_merge($existingMetadata, [
-                    'tables_included' => $this->faker->randomElements(['users', 'posts', 'comments'], $this->faker->numberBetween(1, 3)),
-                    'tables_excluded' => $this->faker->randomElements(['logs', 'temp_data', 'cache', 'sessions'], $this->faker->numberBetween(1, 4)),
+                    'tables_included' => // @var mixed faker->randomElements(['users', 'posts', 'comments'], $this->faker->numberBetween(1, 3
+                    'tables_excluded' => // @var mixed faker->randomElements(['logs', 'temp_data', 'cache', 'sessions'], $this->faker->numberBetween(1, 4
                 ]),
             ];
         });
@@ -184,12 +184,12 @@ class DbForgeBackupFactory extends Factory
      */
     public function daily(): static
     {
-        return $this->state(function (array $attributes): array {
+        return // @var mixed state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
-                'backup_name' => 'daily_backup_'.$this->faker->date('Y-m-d_H-i-s'),
+                'backup_name' => 'daily_backup_'.// @var mixed faker->date('Y-m-d_H-i-s'
                 'retention_days' => 7,
                 'metadata' => array_merge($existingMetadata, [
                     'schedule' => 'daily',
@@ -204,12 +204,12 @@ class DbForgeBackupFactory extends Factory
      */
     public function weekly(): static
     {
-        return $this->state(function (array $attributes): array {
+        return // @var mixed state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
-                'backup_name' => 'weekly_backup_'.$this->faker->date('Y-m-d_H-i-s'),
+                'backup_name' => 'weekly_backup_'.// @var mixed faker->date('Y-m-d_H-i-s'
                 'retention_days' => 30,
                 'metadata' => array_merge($existingMetadata, [
                     'schedule' => 'weekly',
@@ -225,12 +225,12 @@ class DbForgeBackupFactory extends Factory
      */
     public function monthly(): static
     {
-        return $this->state(function (array $attributes): array {
+        return // @var mixed state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
-                'backup_name' => 'monthly_backup_'.$this->faker->date('Y-m-d_H-i-s'),
+                'backup_name' => 'monthly_backup_'.// @var mixed faker->date('Y-m-d_H-i-s'
                 'retention_days' => 365,
                 'metadata' => array_merge($existingMetadata, [
                     'schedule' => 'monthly',
@@ -246,14 +246,14 @@ class DbForgeBackupFactory extends Factory
      */
     public function compressed(): static
     {
-        return $this->state(function (array $attributes): array {
+        return // @var mixed state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
                 'metadata' => array_merge($existingMetadata, [
-                    'compression' => $this->faker->randomElement(['gzip', 'bzip2', 'lz4']),
-                    'compression_ratio' => $this->faker->randomFloat(2, 0.3, 0.8),
+                    'compression' => // @var mixed faker->randomElement(['gzip', 'bzip2', 'lz4']
+                    'compression_ratio' => // @var mixed faker->randomFloat(2, 0.3, 0.8
                 ]),
             ];
         });
@@ -264,15 +264,15 @@ class DbForgeBackupFactory extends Factory
      */
     public function encrypted(): static
     {
-        return $this->state(function (array $attributes): array {
+        return // @var mixed state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
                 'metadata' => array_merge($existingMetadata, [
                     'encryption' => true,
-                    'encryption_algorithm' => $this->faker->randomElement(['AES-256', 'ChaCha20', 'Twofish']),
-                    'encryption_key_id' => $this->faker->uuid(),
+                    'encryption_algorithm' => // @var mixed faker->randomElement(['AES-256', 'ChaCha20', 'Twofish']
+                    'encryption_key_id' => // @var mixed faker->uuid(
                 ]),
             ];
         });
@@ -283,15 +283,15 @@ class DbForgeBackupFactory extends Factory
      */
     public function large(): static
     {
-        return $this->state(function (array $attributes): array {
+        return // @var mixed state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
-                'backup_size' => $this->faker->numberBetween(1024 * 1024 * 1024, 10 * 1024 * 1024 * 1024), // 1GB to 10GB
+                'backup_size' => // @var mixed faker->numberBetween(1024 * 1024 * 1024, 10 * 1024 * 1024 * 1024
                 'metadata' => array_merge($existingMetadata, [
-                    'estimated_time' => $this->faker->numberBetween(300, 3600), // 5 minutes to 1 hour
-                    'parallel_jobs' => $this->faker->numberBetween(2, 8),
+                    'estimated_time' => // @var mixed faker->numberBetween(300, 3600
+                    'parallel_jobs' => // @var mixed faker->numberBetween(2, 8
                 ]),
             ];
         });
@@ -302,14 +302,14 @@ class DbForgeBackupFactory extends Factory
      */
     public function small(): static
     {
-        return $this->state(function (array $attributes): array {
+        return // @var mixed state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
-                'backup_size' => $this->faker->numberBetween(1024 * 1024, 10 * 1024 * 1024), // 1MB to 10MB
+                'backup_size' => // @var mixed faker->numberBetween(1024 * 1024, 10 * 1024 * 1024
                 'metadata' => array_merge($existingMetadata, [
-                    'estimated_time' => $this->faker->numberBetween(10, 300), // 10 seconds to 5 minutes
+                    'estimated_time' => // @var mixed faker->numberBetween(10, 300
                     'parallel_jobs' => 1,
                 ]),
             ];
@@ -321,7 +321,7 @@ class DbForgeBackupFactory extends Factory
      */
     public function withRetention(int $days): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'retention_days' => $days,
         ]);
     }
@@ -331,7 +331,7 @@ class DbForgeBackupFactory extends Factory
      */
     public function byUser(int $userId): static
     {
-        return $this->state(fn (array $attributes) => [
+        return // @var mixed state(fn (array $attributes
             'created_by' => $userId,
         ]);
     }
@@ -343,7 +343,7 @@ class DbForgeBackupFactory extends Factory
      */
     public function forTables(array $tables): static
     {
-        return $this->state(function (array $attributes) use ($tables): array {
+        return // @var mixed state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 

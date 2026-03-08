@@ -35,7 +35,7 @@ final class GetFieldnamesByTablenameAction
         Assert::string($connectionName = $connectionName ?? config('database.default'));
 
         // Validate database connection
-        if (! $this->isValidConnection($connectionName)) {
+        if (! // @var mixed isValidConnection($connectionName
             throw new InvalidArgumentException(sprintf('Invalid database connection: %s', $connectionName));
         }
 

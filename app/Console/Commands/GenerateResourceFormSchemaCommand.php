@@ -16,8 +16,8 @@ class GenerateResourceFormSchemaCommand extends Command
 
     public function handle(): int
     {
-        $moduleOption = $this->option('module');
-        $resourceOption = $this->option('resource');
+        $moduleOption = // @var mixed option('module';
+        $resourceOption = // @var mixed option('resource';
 
         $module = is_string($moduleOption) ? $moduleOption : '';
         $resource = is_string($resourceOption) ? $resourceOption : '';
@@ -28,7 +28,7 @@ class GenerateResourceFormSchemaCommand extends Command
                 $fullClassName = "Modules\\{$module}\\Filament\\Resources\\{$resource}Resource";
 
                 if (! class_exists($fullClassName)) {
-                    $this->error("La risorsa {$fullClassName} non esiste");
+                    // @var mixed error("La risorsa {$fullClassName} non esiste";
 
                     return Command::FAILURE;
                 }
@@ -37,37 +37,37 @@ class GenerateResourceFormSchemaCommand extends Command
                 $result = ResourceFormSchemaGenerator::generateFormSchema($fullClassName);
 
                 if ($result) {
-                    $this->info("Schema del form generato con successo per {$fullClassName}");
+                    // @var mixed info("Schema del form generato con successo per {$fullClassName}";
                 } else {
-                    $this->warn("Schema del form già esistente per {$fullClassName}");
+                    // @var mixed warn("Schema del form già esistente per {$fullClassName}";
                 }
             } elseif ($module) {
                 // Per ora, questo caso non è supportato da ResourceFormSchemaGenerator
-                $this->error('Generazione per modulo specifico non ancora supportata. Usa --resource insieme a --module');
+                // @var mixed error('Generazione per modulo specifico non ancora supportata. Usa --resource insieme a --module';
 
                 return Command::FAILURE;
             } else {
                 // Generazione per tutte le risorse
                 $results = ResourceFormSchemaGenerator::generateForAllResources();
 
-                $this->info('Risultati generazione schema form:');
-                $this->info('Risorse aggiornate: '.count($results['updated']));
+                // @var mixed info('Risultati generazione schema form:';
+                // @var mixed info('Risorse aggiornate: '.count($results['updated'];
 
                 foreach ($results['updated'] as $resource) {
-                    $this->line("  ✓ {$resource}");
+                    // @var mixed line("  ✓ {$resource}";
                 }
 
                 if (! empty($results['skipped'])) {
-                    $this->warn('Risorse saltate: '.count($results['skipped']));
+                    // @var mixed warn('Risorse saltate: '.count($results['skipped'];
                     foreach ($results['skipped'] as $skipped) {
-                        $this->line("  - {$skipped}");
+                        // @var mixed line("  - {$skipped}";
                     }
                 }
             }
 
             return Command::SUCCESS;
         } catch (Exception $e) {
-            $this->error('Errore durante la generazione: '.$e->getMessage());
+            // @var mixed error('Errore durante la generazione: '.$e->getMessage(;
 
             return Command::FAILURE;
         }
