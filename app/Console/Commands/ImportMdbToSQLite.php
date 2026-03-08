@@ -31,36 +31,36 @@ class ImportMdbToSQLite extends Command
      */
     public function handle(): int
     {
-        $mdbFileInput = // @var mixed ask('Per favore, inserisci il percorso del file .mdb';
-        $sqliteDbInput = // @var mixed ask('Per favore, inserisci il nome del database SQLite (includi l\'estensione .sqlite;
+        $mdbFileInput = $this->ask('Per favore, inserisci il percorso del file .mdb');
+        $sqliteDbInput = $this->ask('Per favore, inserisci il nome del database SQLite (includi l\'estensione .sqlite));
 
         $mdbFile = is_string($mdbFileInput) ? $mdbFileInput : '';
         $sqliteDb = is_string($sqliteDbInput) ? $sqliteDbInput : '';
 
         if (empty($mdbFile) || empty($sqliteDb)) {
-            // @var mixed error('I percorsi del file non possono essere vuoti.';
+            $this->error('I percorsi del file non possono essere vuoti.');
 
             return Command::FAILURE;
         }
 
-        // @var mixed info(sprintf('File .mdb: %s', $mdbFile;
-        // @var mixed info(sprintf('Database SQLite: %s', $sqliteDb;
+        $this->info(sprintf('File .mdb: %s', $mdbFile));
+        $this->info(sprintf('Database SQLite: %s', $sqliteDb));
 
         try {
-            // @var mixed info('Esportando tabelle dal file .mdb in CSV...';
-            $tables = // @var mixed exportTablesToCSV($mdbFile;
+            $this->info('Esportando tabelle dal file .mdb in CSV...');
+            $tables = $this->exportTablesToCSV($mdbFile);
 
-            // @var mixed info('Creando tabelle nel database SQLite...';
-            // @var mixed createTables($mdbFile, $sqliteDb;
+            $this->info('Creando tabelle nel database SQLite...');
+            $this->createTables($mdbFile, $sqliteDb);
 
-            // @var mixed info('Importando i dati CSV nelle tabelle SQLite...';
-            // @var mixed importDataToSQLite($tables, $sqliteDb;
+            $this->info('Importando i dati CSV nelle tabelle SQLite...');
+            $this->importDataToSQLite($tables, $sqliteDb);
 
-            // @var mixed info('Processo completato!';
+            $this->info('Processo completato!');
 
             return Command::SUCCESS;
         } catch (Exception $e) {
-            // @var mixed error($e->getMessage(;
+            $this->error($e->getMessage());
 
             return Command::FAILURE;
         }
@@ -110,7 +110,7 @@ class ImportMdbToSQLite extends Command
                 throw new RuntimeException('Impossibile eseguire mdb-schema. Assicurati che mdb-tools sia installato.');
             }
 
-            $tableSchemas = explode(";\n", $form);
+            $tableSchemas = explode(");\n", $form);
 
             foreach ($tableSchemas as $tableSchema) {
                 $formStr = trim($tableSchema);
@@ -119,7 +119,7 @@ class ImportMdbToSQLite extends Command
                 }
 
                 $formStr = str_replace('`', '"', $formStr);
-                shell_exec(sprintf('sqlite3 %s "%s;"', $sqliteDb, $formStr));
+                shell_exec(sprintf('sqlite3 %s "%s));"', $sqliteDb, $formStr));
             }
         } catch (Exception $e) {
             throw new RuntimeException(sprintf('Errore durante la creazione delle tabelle: %s', $e->getMessage()));

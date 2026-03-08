@@ -43,7 +43,7 @@ class ParsePrintPageStringCommand extends Command
      */
     public function handle(): void
     {
-        $str = // @var mixed argument('str';
+        $str = $this->argument('str');
         if (! is_string($str)) {
             throw new Exception('argument str must be a string');
         }

@@ -33,7 +33,7 @@ pest()->extend(TestCase::class)
 */
 
 expect()->extend('toBeDbForgeModel', function () {
-    return // @var mixed toBeInstanceOf(Model::class;
+    return $this->toBeInstanceOf(Model::class);
 });
 
 /*

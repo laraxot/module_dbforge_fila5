@@ -32,34 +32,34 @@ class DatabaseSchemaExporterCommand extends Command
      */
     public function handle(): int
     {
-        $connectionArg = // @var mixed argument('connection';
+        $connectionArg = $this->argument('connection');
         $defaultConnection = config('database.default');
         $connection = is_string($connectionArg) ? $connectionArg : (is_string($defaultConnection) ? $defaultConnection : 'mysql');
 
-        // @var mixed info("Esportazione dello schema del database dalla connessione: {$connection}";
+        $this->info("Esportazione dello schema del database dalla connessione: {$connection}");
 
         // Ottieni il nome del database dalla configurazione
         $databaseNameConfig = config("database.connections.{$connection}.database");
         $databaseName = is_string($databaseNameConfig) ? $databaseNameConfig : '';
 
         if (empty($databaseName)) {
-            // @var mixed error("Impossibile trovare il database per la connessione {$connection}";
+            $this->error("Impossibile trovare il database per la connessione {$connection}");
 
             return 1;
         }
 
-        // @var mixed info("Database: {$databaseName}";
+        $this->info("Database: {$databaseName}");
 
         // Ottieni la lista di tutte le tabelle
-        $tables = // @var mixed getTables($connection;
+        $tables = $this->getTables($connection);
 
         if (empty($tables)) {
-            // @var mixed error("Nessuna tabella trovata nel database {$databaseName}";
+            $this->error("Nessuna tabella trovata nel database {$databaseName}");
 
             return 1;
         }
 
-        // @var mixed info('Trovate '.count($tables;
+        $this->info('Trovate '.count($tables));
 
         // Inizializza l'array che conterrà tutte le informazioni
         $databaseSchema = [
@@ -68,19 +68,19 @@ class DatabaseSchemaExporterCommand extends Command
             'tables' => [],
         ];
 
-        $progressBar = // @var mixed output->createProgressBar(count($tables;
+        $progressBar = $output->createProgressBar(count($tables));
         $progressBar->start();
 
         foreach ($tables as $table) {
-            $databaseSchema['tables'][$table] = // @var mixed getTableInfo($connection, $table;
+            $databaseSchema['tables'][$table] = $this->getTableInfo($connection, $table);
             $progressBar->advance();
         }
 
         $progressBar->finish();
-        // @var mixed newLine(;
+        $this->newLine();
 
         // Aggiungi informazioni sulle relazioni tra tabelle
-        $databaseSchema['relationships'] = // @var mixed getRelationships($connection, $tables;
+        $databaseSchema['relationships'] = $this->getRelationships($connection, $tables);
 
         // Crea directory se non esiste
         $outputDir = base_path('docs');
@@ -92,7 +92,7 @@ class DatabaseSchemaExporterCommand extends Command
         $filename = "{$outputDir}/{$databaseName}_schema.json";
         File::put($filename, json_encode($databaseSchema, JSON_PRETTY_PRINT));
 
-        // @var mixed info("Schema del database esportato con successo in: {$filename}";
+        $this->info("Schema del database esportato con successo in: {$filename}");
 
         return 0;
     }
@@ -126,12 +126,12 @@ class DatabaseSchemaExporterCommand extends Command
      */
     private function getTableInfo(string $connection, string $table): array
     {
-        $columns = // @var mixed getTableColumns($connection, $table;
-        $indexes = // @var mixed getTableIndexes($connection, $table;
-        $primaryKey = // @var mixed getTablePrimaryKey($connection, $table;
-        $foreignKeys = // @var mixed getTableForeignKeys($connection, $table;
-        $recordCount = // @var mixed getTableRecordCount($connection, $table;
-        $sampleData = // @var mixed getTableSampleData($connection, $table;
+        $columns = $this->getTableColumns($connection, $table);
+        $indexes = $this->getTableIndexes($connection, $table);
+        $primaryKey = $this->getTablePrimaryKey($connection, $table);
+        $foreignKeys = $this->getTableForeignKeys($connection, $table);
+        $recordCount = $this->getTableRecordCount($connection, $table);
+        $sampleData = $this->getTableSampleData($connection, $table);
 
         return [
             'name' => $table,
@@ -328,7 +328,7 @@ class DatabaseSchemaExporterCommand extends Command
         try {
             return DB::connection($connection)->table($table)->limit($limit)->get()->toArray();
         } catch (Exception $e) {
-            // @var mixed warn("Impossibile ottenere dati di esempio per la tabella {$table}: ".$e->getMessage(;
+            $this->warn("Impossibile ottenere dati di esempio per la tabella {$table}: ".$e->getMessage());
 
             return [];
         }
@@ -349,7 +349,7 @@ class DatabaseSchemaExporterCommand extends Command
                 continue;
             }
 
-            $foreignKeys = // @var mixed getTableForeignKeys($connection, $table;
+            $foreignKeys = $this->getTableForeignKeys($connection, $table);
 
             foreach ($foreignKeys as $name => $foreignKey) {
                 if (! is_array($foreignKey)) {

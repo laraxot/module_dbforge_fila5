@@ -33,10 +33,10 @@ class ExecuteSqlFileCommand extends Command
     public function handle(): int
     {
         // Chiedi il percorso del file .sql
-        $filePath = // @var mixed ask('Inserisci il percorso del file .sql';
+        $filePath = $this->ask('Inserisci il percorso del file .sql');
         Assert::string($filePath);
         if (! file_exists($filePath)) {
-            // @var mixed error('Il file specificato non esiste.';
+            $this->error('Il file specificato non esiste.');
 
             return Command::FAILURE;
         }
@@ -45,11 +45,11 @@ class ExecuteSqlFileCommand extends Command
         $sql = file_get_contents($filePath);
 
         // Chiedi i dettagli del database
-        $host = // @var mixed ask('Inserisci l\'host del database', '127.0.0.1';
-        $port = // @var mixed ask('Inserisci la porta del database', '3306';
-        $database = // @var mixed ask('Inserisci il nome del database';
-        $username = // @var mixed ask('Inserisci l\'utente del database';
-        $password = // @var mixed secret('Inserisci la password del database';
+        $host = $this->ask('Inserisci l\'host del database', '127.0.0.1');
+        $port = $this->ask('Inserisci la porta del database', '3306');
+        $database = $this->ask('Inserisci il nome del database');
+        $username = $this->ask('Inserisci l\'utente del database');
+        $password = $this->secret('Inserisci la password del database');
 
         // Configura una connessione temporanea
         config([
@@ -68,9 +68,9 @@ class ExecuteSqlFileCommand extends Command
         try {
             // Connessione al database
             DB::connection('temp')->unprepared($sql);
-            // @var mixed info('File .sql eseguito con successo!';
+            $this->info('File .sql eseguito con successo!');
         } catch (Exception $e) {
-            // @var mixed error("Errore durante l'esecuzione del file: ".$e->getMessage(;
+            $this->error("Errore durante l'esecuzione del file: ".$e->getMessage());
 
             return Command::FAILURE;
         } finally {

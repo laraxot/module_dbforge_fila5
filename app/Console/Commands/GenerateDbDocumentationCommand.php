@@ -36,14 +36,14 @@ class GenerateDbDocumentationCommand extends Command
      */
     public function handle(): int
     {
-        $formPathOption = // @var mixed option('schema';
-        $outputPathOption = // @var mixed option('output';
+        $formPathOption = $this->option('schema');
+        $outputPathOption = $this->option('output');
 
         $formPath = is_string($formPathOption) ? $formPathOption : 'database/schema.json';
         $outputPath = is_string($outputPathOption) ? $outputPathOption : 'docs/database.md';
 
         if (! File::exists($formPath)) {
-            // @var mixed error("Schema file not found: {$formPath}";
+            $this->error("Schema file not found: {$formPath}");
 
             return 1;
         }
@@ -52,15 +52,15 @@ class GenerateDbDocumentationCommand extends Command
         $formDecoded = json_decode($formContent, true);
 
         if (! is_array($formDecoded)) {
-            // @var mixed error('Invalid schema file format';
+            $this->error('Invalid schema file format');
 
             return 1;
         }
 
-        $documentation = // @var mixed generateDocumentation($formDecoded;
+        $documentation = $this->generateDocumentation($formDecoded);
 
         File::put($outputPath, $documentation);
-        // @var mixed info("Documentation generated at: {$outputPath}";
+        $this->info("Documentation generated at: {$outputPath}");
 
         return 0;
     }
@@ -78,7 +78,7 @@ class GenerateDbDocumentationCommand extends Command
         if (isset($form['tables']) && is_array($form['tables'])) {
             foreach ($form['tables'] as $tableName => $table) {
                 if (is_string($tableName) && is_array($table)) {
-                    $doc .= // @var mixed generateTableDocumentation($tableName, $table;
+                    $doc .= $this->generateTableDocumentation($tableName, $table);
                 }
             }
         }
@@ -87,7 +87,7 @@ class GenerateDbDocumentationCommand extends Command
             $doc .= "\n## Relationships\n\n";
             foreach ($form['relationships'] as $relationship) {
                 if (is_array($relationship)) {
-                    $doc .= // @var mixed generateRelationshipDocumentation($relationship;
+                    $doc .= $this->generateRelationshipDocumentation($relationship);
                 }
             }
         }
@@ -203,8 +203,7 @@ class GenerateDbDocumentationCommand extends Command
         return sprintf(
             "- `%s`.`%s` %s `%s`.`%s` (Constraint: `%s`)\n",
             $localTable,
-            $localColumn,
-            // @var mixed getRelationshipArrow($type
+            $localColumn, $getRelationshipArrow($type
             $foreignTable,
             $foreignColumn,
             $constraintName

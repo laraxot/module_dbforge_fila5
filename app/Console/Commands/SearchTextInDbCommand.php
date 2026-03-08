@@ -18,14 +18,14 @@ class SearchTextInDbCommand extends Command
 
     public function handle(): int
     {
-        $searchString = // @var mixed argument('search';
+        $searchString = $this->argument('search');
         if (! is_string($searchString)) {
-            // @var mixed error('Search string must be a valid string';
+            $this->error('Search string must be a valid string');
 
             return Command::FAILURE;
         }
 
-        $specificTables = // @var mixed option('tables';
+        $specificTables = $this->option('tables');
         $databaseName = DB::getDatabaseName();
         $tableProp = 'Tables_in_'.$databaseName;
 
@@ -46,18 +46,18 @@ class SearchTextInDbCommand extends Command
             }
 
             if (! is_string($tableName)) {
-                // @var mixed warn('Invalid table name format';
+                $this->warn('Invalid table name format');
 
                 continue;
             }
 
             if (! Schema::hasTable($tableName)) {
-                // @var mixed warn(sprintf('Table %s does not exist', $tableName;
+                $this->warn(sprintf('Table %s does not exist', $tableName));
 
                 continue;
             }
 
-            // @var mixed info(sprintf('Searching in table: %s', $tableName;
+            $this->info(sprintf('Searching in table: %s', $tableName));
 
             /** @var array<string>|false $columns */
             $columns = Schema::getColumnListing($tableName);
@@ -87,9 +87,9 @@ class SearchTextInDbCommand extends Command
                     ->get();
 
                 if ($results->isNotEmpty()) {
-                    // @var mixed info("Found in column: {$column}";
+                    $this->info("Found in column: {$column}");
                     foreach ($results as $result) {
-                        // @var mixed table(
+                        $this->table(
                             ['Column', 'Value'],
                             collect((array) $result)
                                 ->map(fn ($value, $key) => [
@@ -103,7 +103,7 @@ class SearchTextInDbCommand extends Command
             }
         }
 
-        // @var mixed info('Search completed successfully';
+        $this->info('Search completed successfully');
 
         return Command::SUCCESS;
     }

@@ -18,11 +18,11 @@ class GenerateFilamentResources extends Command
 
     public function handle(): int
     {
-        $moduleName = // @var mixed argument('module';
+        $moduleName = $this->argument('module');
 
         // Assicuriamoci che $moduleName sia una stringa
         if (! is_string($moduleName)) {
-            // @var mixed error('Il nome del modulo deve essere una stringa.';
+            $this->error('Il nome del modulo deve essere una stringa.');
 
             return Command::FAILURE;
         }
@@ -30,16 +30,16 @@ class GenerateFilamentResources extends Command
         $module = Module::find($moduleName);
 
         if (! $module) {
-            // @var mixed error("Il modulo '{$moduleName}' non esiste.";
+            $this->error("Il modulo '{$moduleName}' non esiste.");
 
             return Command::FAILURE;
         }
 
-        // @var mixed info("Generazione delle Filament Resources per il modulo: {$moduleName}";
+        $this->info("Generazione delle Filament Resources per il modulo: {$moduleName}");
 
         $modelsPath = $module->getPath().'/app/Models';
         if (! File::isDirectory($modelsPath)) {
-            // @var mixed error("Nessuna cartella 'Models' trovata nel modulo {$moduleName}.";
+            $this->error("Nessuna cartella 'Models' trovata nel modulo {$moduleName}.");
 
             return Command::FAILURE;
         }
@@ -62,12 +62,12 @@ class GenerateFilamentResources extends Command
             try {
                 Artisan::call('make:filament-resource', $params);
             } catch (Exception $e) {
-                // @var mixed error($e->getMessage(;
+                $this->error($e->getMessage());
             }
-            // @var mixed info("Resource generata per il modello: {$modelName}";
+            $this->info("Resource generata per il modello: {$modelName}");
         }
 
-        // @var mixed info('Tutte le resources sono state generate con successo!';
+        $this->info('Tutte le resources sono state generate con successo!');
 
         return Command::SUCCESS;
     }

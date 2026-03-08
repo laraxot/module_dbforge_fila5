@@ -32,120 +32,120 @@ class DbForgeSchemaFactory extends Factory
     public function definition(): array
     {
         return [
-            'table_name' => // @var mixed faker->randomElement(['users', 'posts', 'comments', 'orders', 'products', 'categories', 'tags', 'permissions', 'roles', 'settings', 'logs', 'notifications', 'migrations', 'failed_jobs', 'password_resets', 'personal_access_tokens']
-            'table_comment' => // @var mixed faker->optional(
-            'engine' => // @var mixed faker->randomElement(['InnoDB', 'MyISAM', 'MEMORY', 'CSV', 'ARCHIVE']
-            'collation' => // @var mixed faker->randomElement(['utf8mb4_unicode_ci', 'utf8mb4_general_ci', 'utf8_unicode_ci', 'latin1_swedish_ci']
-            'row_format' => // @var mixed faker->randomElement(['Dynamic', 'Fixed', 'Compressed', 'Redundant']
-            'table_rows' => // @var mixed faker->numberBetween(0, 1000000
-            'avg_row_length' => // @var mixed faker->numberBetween(100, 10000
-            'data_length' => // @var mixed faker->numberBetween(1024, 1073741824
-            'max_data_length' => // @var mixed faker->optional(
-            'index_length' => // @var mixed faker->numberBetween(1024, 536870912
-            'data_free' => // @var mixed faker->optional(
-            'auto_increment' => // @var mixed faker->optional(
-            'create_time' => // @var mixed faker->dateTimeBetween('-2 years', 'now'
-            'update_time' => // @var mixed faker->optional(
-            'check_time' => // @var mixed faker->optional(
-            'checksum' => // @var mixed faker->optional(
-            'create_options' => // @var mixed faker->optional(
-            'table_catalog' => // @var mixed faker->randomElement(['def', 'information_schema', 'mysql', 'performance_schema']
-            'table_schema' => // @var mixed faker->randomElement(['app_db', 'test_db', 'staging_db', 'production_db', 'backup_db']
-            'version' => // @var mixed faker->numberBetween(1, 10
-            'is_active' => // @var mixed faker->boolean(90
-            'last_analyzed' => // @var mixed faker->optional(
-            'last_optimized' => // @var mixed faker->optional(
+            'table_name' => $faker->randomElement(['users', 'posts', 'comments', 'orders', 'products', 'categories', 'tags', 'permissions', 'roles', 'settings', 'logs', 'notifications', 'migrations', 'failed_jobs', 'password_resets', 'personal_access_tokens']
+            'table_comment' => $faker->optional(
+            'engine' => $faker->randomElement(['InnoDB', 'MyISAM', 'MEMORY', 'CSV', 'ARCHIVE']
+            'collation' => $faker->randomElement(['utf8mb4_unicode_ci', 'utf8mb4_general_ci', 'utf8_unicode_ci', 'latin1_swedish_ci']
+            'row_format' => $faker->randomElement(['Dynamic', 'Fixed', 'Compressed', 'Redundant']
+            'table_rows' => $faker->numberBetween(0, 1000000
+            'avg_row_length' => $faker->numberBetween(100, 10000
+            'data_length' => $faker->numberBetween(1024, 1073741824
+            'max_data_length' => $faker->optional(
+            'index_length' => $faker->numberBetween(1024, 536870912
+            'data_free' => $faker->optional(
+            'auto_increment' => $faker->optional(
+            'create_time' => $faker->dateTimeBetween('-2 years', 'now'
+            'update_time' => $faker->optional(
+            'check_time' => $faker->optional(
+            'checksum' => $faker->optional(
+            'create_options' => $faker->optional(
+            'table_catalog' => $faker->randomElement(['def', 'information_schema', 'mysql', 'performance_schema']
+            'table_schema' => $faker->randomElement(['app_db', 'test_db', 'staging_db', 'production_db', 'backup_db']
+            'version' => $faker->numberBetween(1, 10
+            'is_active' => $faker->boolean(90
+            'last_analyzed' => $faker->optional(
+            'last_optimized' => $faker->optional(
             'metadata' => [
-                'columns_count' => // @var mixed faker->numberBetween(3, 50
-                'indexes_count' => // @var mixed faker->numberBetween(1, 20
-                'foreign_keys_count' => // @var mixed faker->numberBetween(0, 10
-                'triggers_count' => // @var mixed faker->numberBetween(0, 5
-                'views_count' => // @var mixed faker->numberBetween(0, 3
-                'stored_procedures_count' => // @var mixed faker->numberBetween(0, 5
-                'functions_count' => // @var mixed faker->numberBetween(0, 3
-                'events_count' => // @var mixed faker->numberBetween(0, 2
-                'partitioned' => // @var mixed faker->boolean(20
-                'partition_count' => // @var mixed faker->optional(
-                'compression' => // @var mixed faker->optional(
-                'encryption' => // @var mixed faker->boolean(10
-                'tablespace' => // @var mixed faker->optional(
-                'row_security' => // @var mixed faker->boolean(5
-                'force_row_level_security' => // @var mixed faker->boolean(5
-                'inherit' => // @var mixed faker->optional(
-                'persistence' => // @var mixed faker->randomElement(['PERMANENT', 'TEMPORARY']
-                'log' => // @var mixed faker->boolean(30
-                'temporary' => // @var mixed faker->boolean(10
-                'unlogged' => // @var mixed faker->boolean(5
-                'oids' => // @var mixed faker->boolean(5
-                'on_commit' => // @var mixed faker->optional(
-                'parallel_workers' => // @var mixed faker->optional(
-                'fillfactor' => // @var mixed faker->optional(
-                'autovacuum_enabled' => // @var mixed faker->boolean(80
-                'autovacuum_vacuum_threshold' => // @var mixed faker->optional(
-                'autovacuum_analyze_threshold' => // @var mixed faker->optional(
-                'autovacuum_vacuum_scale_factor' => // @var mixed faker->optional(
-                'autovacuum_analyze_scale_factor' => // @var mixed faker->optional(
-                'autovacuum_vacuum_cost_limit' => // @var mixed faker->optional(
-                'autovacuum_vacuum_cost_delay' => // @var mixed faker->optional(
-                'autovacuum_freeze_min_age' => // @var mixed faker->optional(
-                'autovacuum_freeze_max_age' => // @var mixed faker->optional(
-                'autovacuum_freeze_table_age' => // @var mixed faker->optional(
-                'autovacuum_multixact_freeze_min_age' => // @var mixed faker->optional(
-                'autovacuum_multixact_freeze_max_age' => // @var mixed faker->optional(
-                'autovacuum_multixact_freeze_table_age' => // @var mixed faker->optional(
-                'toast_tuple_target' => // @var mixed faker->optional(
-                'autovacuum_vacuum_insert_threshold' => // @var mixed faker->optional(
-                'autovacuum_vacuum_insert_scale_factor' => // @var mixed faker->optional(
-                'user_catalog_table' => // @var mixed faker->boolean(5
-                'is_insert_only' => // @var mixed faker->boolean(5
-                'has_oids' => // @var mixed faker->boolean(5
-                'relispartition' => // @var mixed faker->boolean(20
-                'relispartition_parent' => // @var mixed faker->boolean(5
-                'relpartbound' => // @var mixed faker->optional(
-                'relhasindex' => // @var mixed faker->boolean(80
-                'relhasrules' => // @var mixed faker->boolean(20
-                'relhastriggers' => // @var mixed faker->boolean(30
-                'relhasoids' => // @var mixed faker->boolean(5
-                'relhasprimarykey' => // @var mixed faker->boolean(90
-                'relhasforeignkeys' => // @var mixed faker->boolean(40
-                'relhascheck' => // @var mixed faker->boolean(30
-                'relhaspartialindexes' => // @var mixed faker->boolean(20
-                'relhasreplident' => // @var mixed faker->boolean(10
-                'relisreplicated' => // @var mixed faker->boolean(10
-                'relfrozenxid' => // @var mixed faker->optional(
-                'relminmxid' => // @var mixed faker->optional(
-                'relacl' => // @var mixed faker->optional(
-                'reloptions' => // @var mixed faker->optional(
-                'relpartbound_expr' => // @var mixed faker->optional(
+                'columns_count' => $faker->numberBetween(3, 50
+                'indexes_count' => $faker->numberBetween(1, 20
+                'foreign_keys_count' => $faker->numberBetween(0, 10
+                'triggers_count' => $faker->numberBetween(0, 5
+                'views_count' => $faker->numberBetween(0, 3
+                'stored_procedures_count' => $faker->numberBetween(0, 5
+                'functions_count' => $faker->numberBetween(0, 3
+                'events_count' => $faker->numberBetween(0, 2
+                'partitioned' => $faker->boolean(20
+                'partition_count' => $faker->optional(
+                'compression' => $faker->optional(
+                'encryption' => $faker->boolean(10
+                'tablespace' => $faker->optional(
+                'row_security' => $faker->boolean(5
+                'force_row_level_security' => $faker->boolean(5
+                'inherit' => $faker->optional(
+                'persistence' => $faker->randomElement(['PERMANENT', 'TEMPORARY']
+                'log' => $faker->boolean(30
+                'temporary' => $faker->boolean(10
+                'unlogged' => $faker->boolean(5
+                'oids' => $faker->boolean(5
+                'on_commit' => $faker->optional(
+                'parallel_workers' => $faker->optional(
+                'fillfactor' => $faker->optional(
+                'autovacuum_enabled' => $faker->boolean(80
+                'autovacuum_vacuum_threshold' => $faker->optional(
+                'autovacuum_analyze_threshold' => $faker->optional(
+                'autovacuum_vacuum_scale_factor' => $faker->optional(
+                'autovacuum_analyze_scale_factor' => $faker->optional(
+                'autovacuum_vacuum_cost_limit' => $faker->optional(
+                'autovacuum_vacuum_cost_delay' => $faker->optional(
+                'autovacuum_freeze_min_age' => $faker->optional(
+                'autovacuum_freeze_max_age' => $faker->optional(
+                'autovacuum_freeze_table_age' => $faker->optional(
+                'autovacuum_multixact_freeze_min_age' => $faker->optional(
+                'autovacuum_multixact_freeze_max_age' => $faker->optional(
+                'autovacuum_multixact_freeze_table_age' => $faker->optional(
+                'toast_tuple_target' => $faker->optional(
+                'autovacuum_vacuum_insert_threshold' => $faker->optional(
+                'autovacuum_vacuum_insert_scale_factor' => $faker->optional(
+                'user_catalog_table' => $faker->boolean(5
+                'is_insert_only' => $faker->boolean(5
+                'has_oids' => $faker->boolean(5
+                'relispartition' => $faker->boolean(20
+                'relispartition_parent' => $faker->boolean(5
+                'relpartbound' => $faker->optional(
+                'relhasindex' => $faker->boolean(80
+                'relhasrules' => $faker->boolean(20
+                'relhastriggers' => $faker->boolean(30
+                'relhasoids' => $faker->boolean(5
+                'relhasprimarykey' => $faker->boolean(90
+                'relhasforeignkeys' => $faker->boolean(40
+                'relhascheck' => $faker->boolean(30
+                'relhaspartialindexes' => $faker->boolean(20
+                'relhasreplident' => $faker->boolean(10
+                'relisreplicated' => $faker->boolean(10
+                'relfrozenxid' => $faker->optional(
+                'relminmxid' => $faker->optional(
+                'relacl' => $faker->optional(
+                'reloptions' => $faker->optional(
+                'relpartbound_expr' => $faker->optional(
             ],
             'settings' => [
-                'auto_increment_increment' => // @var mixed faker->optional(
-                'auto_increment_offset' => // @var mixed faker->optional(
-                'character_set_name' => // @var mixed faker->randomElement(['utf8mb4', 'utf8', 'latin1', 'ascii']
-                'collation_name' => // @var mixed faker->randomElement(['utf8mb4_unicode_ci', 'utf8mb4_general_ci', 'utf8_unicode_ci', 'latin1_swedish_ci']
-                'table_type' => // @var mixed faker->randomElement(['BASE TABLE', 'VIEW', 'SYSTEM VIEW', 'LOCAL TEMPORARY', 'GLOBAL TEMPORARY']
-                'table_collation' => // @var mixed faker->randomElement(['utf8mb4_unicode_ci', 'utf8mb4_general_ci', 'utf8_unicode_ci', 'latin1_swedish_ci']
-                'checksum' => // @var mixed faker->optional(
-                'create_options' => // @var mixed faker->optional(
-                'table_comment' => // @var mixed faker->optional(
-                'max_index_length' => // @var mixed faker->optional(
-                'temporary' => // @var mixed faker->optional(
-                'update_time' => // @var mixed faker->optional(
-                'check_time' => // @var mixed faker->optional(
-                'table_rows' => // @var mixed faker->optional(
-                'avg_row_length' => // @var mixed faker->optional(
-                'data_length' => // @var mixed faker->optional(
-                'max_data_length' => // @var mixed faker->optional(
-                'index_length' => // @var mixed faker->optional(
-                'data_free' => // @var mixed faker->optional(
-                'auto_increment' => // @var mixed faker->optional(
-                'create_time' => // @var mixed faker->optional(
-                'table_catalog' => // @var mixed faker->optional(
-                'table_schema' => // @var mixed faker->optional(
-                'version' => // @var mixed faker->optional(
-                'is_active' => // @var mixed faker->optional(
-                'last_analyzed' => // @var mixed faker->optional(
-                'last_optimized' => // @var mixed faker->optional(
+                'auto_increment_increment' => $faker->optional(
+                'auto_increment_offset' => $faker->optional(
+                'character_set_name' => $faker->randomElement(['utf8mb4', 'utf8', 'latin1', 'ascii']
+                'collation_name' => $faker->randomElement(['utf8mb4_unicode_ci', 'utf8mb4_general_ci', 'utf8_unicode_ci', 'latin1_swedish_ci']
+                'table_type' => $faker->randomElement(['BASE TABLE', 'VIEW', 'SYSTEM VIEW', 'LOCAL TEMPORARY', 'GLOBAL TEMPORARY']
+                'table_collation' => $faker->randomElement(['utf8mb4_unicode_ci', 'utf8mb4_general_ci', 'utf8_unicode_ci', 'latin1_swedish_ci']
+                'checksum' => $faker->optional(
+                'create_options' => $faker->optional(
+                'table_comment' => $faker->optional(
+                'max_index_length' => $faker->optional(
+                'temporary' => $faker->optional(
+                'update_time' => $faker->optional(
+                'check_time' => $faker->optional(
+                'table_rows' => $faker->optional(
+                'avg_row_length' => $faker->optional(
+                'data_length' => $faker->optional(
+                'max_data_length' => $faker->optional(
+                'index_length' => $faker->optional(
+                'data_free' => $faker->optional(
+                'auto_increment' => $faker->optional(
+                'create_time' => $faker->optional(
+                'table_catalog' => $faker->optional(
+                'table_schema' => $faker->optional(
+                'version' => $faker->optional(
+                'is_active' => $faker->optional(
+                'last_analyzed' => $faker->optional(
+                'last_optimized' => $faker->optional(
             ],
         ];
     }
@@ -155,7 +155,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function active(): static
     {
-        return // @var mixed state(fn (array $attributes
+        return $this->state(fn (array $attributes
             'is_active' => true,
         ]);
     }
@@ -165,7 +165,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function inactive(): static
     {
-        return // @var mixed state(fn (array $attributes
+        return $this->state(fn (array $attributes
             'is_active' => false,
         ]);
     }
@@ -175,11 +175,11 @@ class DbForgeSchemaFactory extends Factory
      */
     public function large(): static
     {
-        return // @var mixed state(fn (array $attributes
-            'table_rows' => // @var mixed faker->numberBetween(100000, 10000000
-            'avg_row_length' => // @var mixed faker->numberBetween(5000, 50000
-            'data_length' => // @var mixed faker->numberBetween(1073741824, 10737418240
-            'index_length' => // @var mixed faker->numberBetween(536870912, 2147483648
+        return $this->state(fn (array $attributes
+            'table_rows' => $faker->numberBetween(100000, 10000000
+            'avg_row_length' => $faker->numberBetween(5000, 50000
+            'data_length' => $faker->numberBetween(1073741824, 10737418240
+            'index_length' => $faker->numberBetween(536870912, 2147483648
         ]);
     }
 
@@ -188,11 +188,11 @@ class DbForgeSchemaFactory extends Factory
      */
     public function small(): static
     {
-        return // @var mixed state(fn (array $attributes
-            'table_rows' => // @var mixed faker->numberBetween(0, 1000
-            'avg_row_length' => // @var mixed faker->numberBetween(100, 1000
-            'data_length' => // @var mixed faker->numberBetween(1024, 1048576
-            'index_length' => // @var mixed faker->numberBetween(1024, 1048576
+        return $this->state(fn (array $attributes
+            'table_rows' => $faker->numberBetween(0, 1000
+            'avg_row_length' => $faker->numberBetween(100, 1000
+            'data_length' => $faker->numberBetween(1024, 1048576
+            'index_length' => $faker->numberBetween(1024, 1048576
         ]);
     }
 
@@ -201,14 +201,14 @@ class DbForgeSchemaFactory extends Factory
      */
     public function partitioned(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
                 'metadata' => array_merge($existingMetadata, [
                     'partitioned' => true,
-                    'partition_count' => // @var mixed faker->numberBetween(2, 16
+                    'partition_count' => $faker->numberBetween(2, 16
                 ]),
             ];
         });
@@ -219,7 +219,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function notPartitioned(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
@@ -237,13 +237,13 @@ class DbForgeSchemaFactory extends Factory
      */
     public function compressed(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
                 'metadata' => array_merge($existingMetadata, [
-                    'compression' => // @var mixed faker->randomElement(['ZLIB', 'LZ4', 'ZSTD']
+                    'compression' => $faker->randomElement(['ZLIB', 'LZ4', 'ZSTD']
                 ]),
             ];
         });
@@ -254,7 +254,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function uncompressed(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
@@ -271,7 +271,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function encrypted(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
@@ -288,7 +288,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function unencrypted(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
@@ -305,7 +305,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function temporary(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
@@ -323,7 +323,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function permanent(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
@@ -341,13 +341,13 @@ class DbForgeSchemaFactory extends Factory
      */
     public function manyColumns(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
                 'metadata' => array_merge($existingMetadata, [
-                    'columns_count' => // @var mixed faker->numberBetween(20, 100
+                    'columns_count' => $faker->numberBetween(20, 100
                 ]),
             ];
         });
@@ -358,13 +358,13 @@ class DbForgeSchemaFactory extends Factory
      */
     public function fewColumns(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
                 'metadata' => array_merge($existingMetadata, [
-                    'columns_count' => // @var mixed faker->numberBetween(3, 10
+                    'columns_count' => $faker->numberBetween(3, 10
                 ]),
             ];
         });
@@ -375,13 +375,13 @@ class DbForgeSchemaFactory extends Factory
      */
     public function manyIndexes(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
                 'metadata' => array_merge($existingMetadata, [
-                    'indexes_count' => // @var mixed faker->numberBetween(10, 30
+                    'indexes_count' => $faker->numberBetween(10, 30
                 ]),
             ];
         });
@@ -392,13 +392,13 @@ class DbForgeSchemaFactory extends Factory
      */
     public function fewIndexes(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
                 'metadata' => array_merge($existingMetadata, [
-                    'indexes_count' => // @var mixed faker->numberBetween(1, 5
+                    'indexes_count' => $faker->numberBetween(1, 5
                 ]),
             ];
         });
@@ -409,14 +409,14 @@ class DbForgeSchemaFactory extends Factory
      */
     public function withForeignKeys(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
                 'metadata' => array_merge($existingMetadata, [
                     'relhasforeignkeys' => true,
-                    'foreign_keys_count' => // @var mixed faker->numberBetween(1, 10
+                    'foreign_keys_count' => $faker->numberBetween(1, 10
                 ]),
             ];
         });
@@ -427,7 +427,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function withoutForeignKeys(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
@@ -445,14 +445,14 @@ class DbForgeSchemaFactory extends Factory
      */
     public function withTriggers(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
             return [
                 'metadata' => array_merge($existingMetadata, [
                     'relhastriggers' => true,
-                    'triggers_count' => // @var mixed faker->numberBetween(1, 5
+                    'triggers_count' => $faker->numberBetween(1, 5
                 ]),
             ];
         });
@@ -463,7 +463,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function withoutTriggers(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
@@ -481,7 +481,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function withRules(): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingMetadata */
             $existingMetadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
 
@@ -498,7 +498,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function withoutRules(): static
     {
-        return // @var mixed state(fn (array $attributes
+        return $this->state(fn (array $attributes
             'metadata' => array_merge(is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [], [
                 'relhasrules' => false,
             ]),
@@ -510,7 +510,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function withChecks(): static
     {
-        return // @var mixed state(fn (array $attributes
+        return $this->state(fn (array $attributes
             'metadata' => array_merge(is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [], [
                 'relhascheck' => true,
             ]),
@@ -522,7 +522,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function withoutChecks(): static
     {
-        return // @var mixed state(fn (array $attributes
+        return $this->state(fn (array $attributes
             'metadata' => array_merge(is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [], [
                 'relhascheck' => false,
             ]),
@@ -534,7 +534,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function forDatabase(string $databaseName): static
     {
-        return // @var mixed state(fn (array $attributes
+        return $this->state(fn (array $attributes
             'table_schema' => $databaseName,
         ]);
     }
@@ -544,7 +544,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function withEngine(string $engine): static
     {
-        return // @var mixed state(fn (array $attributes
+        return $this->state(fn (array $attributes
             'engine' => $engine,
         ]);
     }
@@ -554,7 +554,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function withCollation(string $collation): static
     {
-        return // @var mixed state(fn (array $attributes
+        return $this->state(fn (array $attributes
             'collation' => $collation,
         ]);
     }
@@ -564,7 +564,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function withRowFormat(string $rowFormat): static
     {
-        return // @var mixed state(fn (array $attributes
+        return $this->state(fn (array $attributes
             'row_format' => $rowFormat,
         ]);
     }
@@ -574,7 +574,7 @@ class DbForgeSchemaFactory extends Factory
      */
     public function withCharacterSet(string $characterSet): static
     {
-        return // @var mixed state(function (array $attributes
+        return $this->state(function (array $attributes
             /** @var array<string, mixed> $existingSettings */
             $existingSettings = is_array($attributes['settings'] ?? null) ? $attributes['settings'] : [];
 
@@ -591,8 +591,8 @@ class DbForgeSchemaFactory extends Factory
      */
     public function recentlyCreated(): static
     {
-        return // @var mixed state(fn (array $attributes
-            'create_time' => // @var mixed faker->dateTimeBetween('-1 month', 'now'
+        return $this->state(fn (array $attributes
+            'create_time' => $faker->dateTimeBetween('-1 month', 'now'
         ]);
     }
 
@@ -601,8 +601,8 @@ class DbForgeSchemaFactory extends Factory
      */
     public function old(): static
     {
-        return // @var mixed state(fn (array $attributes
-            'create_time' => // @var mixed faker->dateTimeBetween('-5 years', '-2 years'
+        return $this->state(fn (array $attributes
+            'create_time' => $faker->dateTimeBetween('-5 years', '-2 years'
         ]);
     }
 
@@ -611,8 +611,8 @@ class DbForgeSchemaFactory extends Factory
      */
     public function recentlyUpdated(): static
     {
-        return // @var mixed state(fn (array $attributes
-            'update_time' => // @var mixed faker->dateTimeBetween('-1 month', 'now'
+        return $this->state(fn (array $attributes
+            'update_time' => $faker->dateTimeBetween('-1 month', 'now'
         ]);
     }
 
@@ -621,8 +621,8 @@ class DbForgeSchemaFactory extends Factory
      */
     public function recentlyAnalyzed(): static
     {
-        return // @var mixed state(fn (array $attributes
-            'last_analyzed' => // @var mixed faker->dateTimeBetween('-1 month', 'now'
+        return $this->state(fn (array $attributes
+            'last_analyzed' => $faker->dateTimeBetween('-1 month', 'now'
         ]);
     }
 
@@ -631,8 +631,8 @@ class DbForgeSchemaFactory extends Factory
      */
     public function recentlyOptimized(): static
     {
-        return // @var mixed state(fn (array $attributes
-            'last_optimized' => // @var mixed faker->dateTimeBetween('-1 month', 'now'
+        return $this->state(fn (array $attributes
+            'last_optimized' => $faker->dateTimeBetween('-1 month', 'now'
         ]);
     }
 }

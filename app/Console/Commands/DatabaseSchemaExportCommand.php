@@ -40,12 +40,12 @@ class DatabaseSchemaExportCommand extends Command
      */
     public function handle(): void
     {
-        $module = // @var mixed option('module';
-        $table = // @var mixed argument('table';
+        $module = $this->option('module');
+        $table = $this->argument('table');
 
         if ($table !== null && is_string($table)) {
             $moduleString = is_string($module) ? $module : null;
-            // @var mixed exportTable($table, $moduleString;
+            $this->exportTable($table, $moduleString);
 
             return;
         }
@@ -54,7 +54,7 @@ class DatabaseSchemaExportCommand extends Command
         foreach ($tables as $tableObj) {
             $tableName = (string) current((array) $tableObj);
             $moduleString = is_string($module) ? $module : null;
-            // @var mixed exportTable($tableName, $moduleString;
+            $this->exportTable($tableName, $moduleString);
         }
     }
 
@@ -70,14 +70,14 @@ class DatabaseSchemaExportCommand extends Command
     protected function exportTable(string $table, ?string $module = null): void
     {
         if (! SchemaFacade::hasTable($table)) {
-            // @var mixed error("La tabella [{$table}] non esiste";
+            $this->error("La tabella [{$table}] non esiste");
 
             return;
         }
 
-        $columns = // @var mixed getTableColumns($table;
-        $indexes = // @var mixed getTableIndexes($table;
-        $foreignKeys = // @var mixed getTableForeignKeys($table;
+        $columns = $this->getTableColumns($table);
+        $indexes = $this->getTableIndexes($table);
+        $foreignKeys = $this->getTableForeignKeys($table);
 
         $data = [
             'name' => $table,
@@ -86,11 +86,11 @@ class DatabaseSchemaExportCommand extends Command
             'foreignKeys' => $foreignKeys,
         ];
 
-        $path = // @var mixed getExportPath($table, $module;
+        $path = $this->getExportPath($table, $module);
         $json = json_encode($data, JSON_PRETTY_PRINT);
         file_put_contents($path, $json);
 
-        // @var mixed info("Schema esportato per la tabella [{$table}]";
+        $this->info("Schema esportato per la tabella [{$table}]");
     }
 
     /**
