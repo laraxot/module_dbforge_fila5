@@ -320,7 +320,7 @@ class AnalyzeNamingCommand extends Command
         $issues = [];
 
         foreach ($columns as $column) {
-            foreach ($namingConventions as $rule
+            foreach ($namingConventions as $rule)
                 /** @var array{incorrect: list<string>, correct: list<string>, message: string} $rule */
                 $issues = array_merge($issues, $evaluateColumnAgainstRule($column, $rule));
             }
@@ -338,7 +338,7 @@ class AnalyzeNamingCommand extends Command
         $issues = [];
 
         foreach ($rule['incorrect'] as $incorrect) {
-            if ($isRegexPattern($incorrect
+            if ($isRegexPattern($incorrect))
                 if (preg_match($incorrect, $column) === 1) {
                     $issues[] = $this->makeTableIssue($column, $rule['message'], $this->getCorrectFieldPattern($column, $rule));
                 }
@@ -361,19 +361,19 @@ class AnalyzeNamingCommand extends Command
     {
         $issues = [];
 
-        foreach ($namingConventions as $rule
+        foreach ($namingConventions as $rule)
             $incorrectFields = $rule['incorrect'];
             $message = $rule['message'];
 
             foreach ($incorrectFields as $incorrect) {
-                if ($isRegexPattern($incorrect
+                if ($isRegexPattern($incorrect))
                     continue;
                 }
 
                 $fillableMatches = [];
                 if (preg_match('/protected\s+\$fillable\s*=\s*\[(.*?)\]/s', $content, $fillableMatches) === 1) {
                     $fillableBody = (string) ($fillableMatches[1] ?? '');
-                    if ($stringContainsField($fillableBody, $incorrect
+                    if ($stringContainsField($fillableBody, $incorrect))
                         $issues[] = $this->makeModelIssue($incorrect, 'fillable', $message, $this->getCorrectField($incorrect, $rule));
                     }
                 }
@@ -381,7 +381,7 @@ class AnalyzeNamingCommand extends Command
                 $castsMatches = [];
                 if (preg_match('/protected\s+\$casts\s*=\s*\[(.*?)\]/s', $content, $castsMatches) === 1) {
                     $castsBody = (string) ($castsMatches[1] ?? '');
-                    if ($stringContainsField($castsBody, $incorrect
+                    if ($stringContainsField($castsBody, $incorrect))
                         $issues[] = $this->makeModelIssue($incorrect, 'casts', $message, $this->getCorrectField($incorrect, $rule));
                     }
                 }
@@ -405,12 +405,12 @@ class AnalyzeNamingCommand extends Command
     {
         $issues = [];
 
-        foreach ($namingConventions as $rule
+        foreach ($namingConventions as $rule)
             $incorrectFields = $rule['incorrect'];
             $message = $rule['message'];
 
             foreach ($incorrectFields as $incorrect) {
-                if ($isRegexPattern($incorrect
+                if ($isRegexPattern($incorrect))
                     continue;
                 }
 
@@ -420,7 +420,7 @@ class AnalyzeNamingCommand extends Command
                     '/\$request\s*->\s*'.preg_quote($incorrect, '/').'/m',
                 ];
 
-                if ($matchesAnyPattern($content, $patterns
+                if ($matchesAnyPattern($content, $patterns))
                     $issues[] = $this->makeModelIssue($incorrect, 'controller', $message, $this->getCorrectField($incorrect, $rule));
                 }
             }
