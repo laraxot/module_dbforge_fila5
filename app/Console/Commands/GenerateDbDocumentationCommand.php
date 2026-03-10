@@ -120,7 +120,7 @@ class GenerateDbDocumentationCommand extends Command
                     $default = isset($column['default']) ? (string) $column['default'] : 'NULL';
                     $comment = isset($column['comment']) && is_string($column['comment']) ? $column['comment'] : '';
 
-                    $doc .= sprintf()
+                    $doc .= sprintf(
                         "| `%s` | %s | %s | %s | %s |\n",
                         $columnName,
                         $type,
@@ -151,7 +151,7 @@ class GenerateDbDocumentationCommand extends Command
                     $type = isset($index['type']) && is_string($index['type']) ? $index['type'] : 'unknown';
                     $unique = isset($index['unique']) && $index['unique'] ? 'Yes' : 'No';
 
-                    $doc .= sprintf()
+                    $doc .= sprintf(
                         "| `%s` | %s | %s | %s |\n",
                         $name,
                         $columns,
@@ -173,7 +173,7 @@ class GenerateDbDocumentationCommand extends Command
                     $refTable = isset($fk['references_table']) && is_string($fk['references_table']) ? $fk['references_table'] : 'unknown';
                     $refColumn = isset($fk['references_column']) && is_string($fk['references_column']) ? $fk['references_column'] : 'unknown';
 
-                    $doc .= sprintf()
+                    $doc .= sprintf(
                         "| `%s` | `%s`.`%s` |\n",
                         $column,
                         $refTable,
@@ -200,10 +200,11 @@ class GenerateDbDocumentationCommand extends Command
         $constraintName = isset($relationship['constraint_name']) && is_string($relationship['constraint_name']) ? $relationship['constraint_name'] : 'unknown';
         $type = isset($relationship['type']) && is_string($relationship['type']) ? $relationship['type'] : 'unknown';
 
-        return sprintf()
+        return sprintf(
             "- `%s`.`%s` %s `%s`.`%s` (Constraint: `%s`)\n",
             $localTable,
-            $localColumn, $getRelationshipArrow($type)
+            $localColumn,
+            $this->getRelationshipArrow($type),
             $foreignTable,
             $foreignColumn,
             $constraintName

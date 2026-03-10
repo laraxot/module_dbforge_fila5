@@ -32,7 +32,7 @@ class ImportMdbToSQLite extends Command
     public function handle(): int
     {
         $mdbFileInput = $this->ask('Per favore, inserisci il percorso del file .mdb');
-        $sqliteDbInput = $this->ask('Per favore, inserisci il nome del database SQLite (includi l\'estensione .sqlite));
+        $sqliteDbInput = $this->ask('Per favore, inserisci il nome del database SQLite (includi l\'estensione .sqlite)');
 
         $mdbFile = is_string($mdbFileInput) ? $mdbFileInput : '';
         $sqliteDb = is_string($sqliteDbInput) ? $sqliteDbInput : '';

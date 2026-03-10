@@ -144,7 +144,7 @@ class GenerateModelsFromSchemaCommand extends Command
         $casts = $this->getCasts($columns);
         $relations = $this->getRelations($foreignKeys);
 
-        $template = $this->getModelTemplate()
+        $template = $this->getModelTemplate(
             $modelName,
             $namespace,
             $tableName,
@@ -226,12 +226,12 @@ class GenerateModelsFromSchemaCommand extends Command
     {
         $relations = [];
         foreach ($foreignKeys as $name => $fk) {
-            if (is_string($name) && is_array($fk) &&)
+            if (is_string($name) && is_array($fk) &&
                 isset($fk['references_table']) && is_string($fk['references_table']) &&
                 isset($fk['column']) && is_string($fk['column']) &&
                 isset($fk['references_column']) && is_string($fk['references_column'])) {
                 $relatedTable = $fk['references_table'];
-                $relatedModel = $this->getModelName((string));
+                $relatedModel = $this->getModelName((string) $relatedTable);
                 $methodName = Str::camel((string) $relatedTable);
 
                 if (preg_match('/^(.+)_id$/', $fk['column'], $matches) === 1) {
@@ -259,7 +259,7 @@ class GenerateModelsFromSchemaCommand extends Command
      *
      * @throws DatetimeException
      */
-    protected function getModelTemplate()
+    protected function getModelTemplate(
         string $modelName,
         string $namespace,
         string $tableName,
@@ -305,7 +305,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read int \$id
  * @property \Carbon\Carbon \$created_at
  * @property \Carbon\Carbon \$updated_at
- * Generated on: {$this->getCurrentDate()
+ * Generated on: {$this->getCurrentDate()}
  */
 class {$modelName} extends Model
 {
