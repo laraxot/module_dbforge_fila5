@@ -10,14 +10,14 @@ Trasformare DbForge in tool di scaffolding completo che genera modelli, Risorse 
 
 | Metrica | Valore |
 |---------|--------|
-| PHPStan Level 10 | Compliance |
+| PHPStan Level 10 | ❌ (291 Errors - Reported #75) |
 | XotBase Compliance | Sì |
-| Status | In manutenzione |
+| Status | Fix Required |
 
 ## Fasi di sviluppo
 
 ### Fase 1: Qualità (In Progress)
-- [x] PHPStan Level 10 Compliance
+- [ ] PHPStan Level 10 Compliance (Fixing errors in #75)
 - [x] Pulizia documentazione
 - [x] GitHub Action automation
 - [ ] Fix bug isset in GenerateModelsFromSchemaCommand
@@ -35,7 +35,7 @@ Trasformare DbForge in tool di scaffolding completo che genera modelli, Risorse 
 
 ## Checklist qualità
 
-- [x] PHPStan Level 10
+- [ ] PHPStan Level 10
 - [ ] Zero bug noti
 - [ ] Documentazione comandi
 
