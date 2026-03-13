@@ -1,34 +1,13 @@
-# PRD - DbForge Module
+# PRD: DbForge Module
 
-## 1. Executive Summary
-The DbForge module provides tools for programmatically managing database schema and migrations across all modules in the PTVX platform.
+## 📋 Overview
+- **Author:** Gemini CLI
+- **Status:** Draft
+- **Target Release:** 1.0.0
 
-## 2. Target Personas
-- **Internal Developers:** Use the module to automate database changes.
-- **DevOps Engineers:** Monitor and manage database state and migrations.
-- **Architects:** Design and maintain database schema standards.
+## ❓ Problem Statement
+Specialized logic for DbForge needs a dedicated, type-safe Module to ensure maintainability.
 
-## 3. Functional Requirements
-- Automate creation and execution of migrations.
-- Provide a fluent interface for schema modification.
-- Roll back migrations in case of deployment failures.
-- Verify schema consistency across all modules.
-
-## 4. Service Interface (The Contract)
-- **API Endpoints:**
-  - `POST /api/db-forge/migrate`: Run pending migrations.
-  - `POST /api/db-forge/rollback`: Roll back the last migration.
-- **Events:**
-  - `DbMigrationExecuted`: Triggered when a migration completes.
-
-## 5. System Architecture & Dependencies
-- **Data Ownership:** Owns migration records and schema metadata.
-- **Downstream Dependencies:** Depends on `Xot` and `laravel/framework`.
-
-## 6. Non-Functional Requirements
-- **Reliability:** Atomic operations for schema changes.
-- **Observability:** Comprehensive logging for all database modifications.
-
-## 7. Release Criteria
-- PHPStan Level 10 compliance.
-- Robust error handling for migration failures.
+## 🎯 Goals & Success Metrics
+- **Goal 1:** 100% PHPStan L10 compliance.
+- **Goal 2:** Seamless integration with XotBase.
