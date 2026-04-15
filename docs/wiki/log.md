@@ -1,23 +1,29 @@
 ---
-title: Wiki Log
-description: Registro cronologico delle operazioni
-tags:
-  - log
-  - history
-created: 2026-04-15
+title: "Activity Log"
+module: "DbForge"
 ---
 
-# Wiki Log - DbForge
+# Activity Log — DbForge
 
-Registro append-only delle operazioni sulla wiki.
+> **Purpose:** Append-only chronological activity record tracking ingests, queries, and lint passes.
 
-## [2026-04-15] setup | Inizializzazione wiki modulo
+## Log Entries
 
-- Creato schema wiki secondo pattern Karpathy LLM Wiki
-- Inizializzata struttura directory
+_No activity yet. Start by ingesting raw documents._
 
-## TODO
+### Format
 
-- Aggiungere prime pagine concept
-- Documentare modelli principali
-- Importare documentazione esistente
+```
+[YYYY-MM-DD HH:MM:SS UTC] [OPERATION] Description
+```
+
+**Operations:**
+- `INGEST` — Added raw document to wiki
+- `QUERY` — Answered question from wiki
+- `LINT` — Maintained wiki quality
+- `UPDATE` — Modified existing wiki page
+
+---
+
+**Last Activity:** None  
+**Total Operations:** 0

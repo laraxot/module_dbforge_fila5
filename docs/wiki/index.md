@@ -1,28 +1,32 @@
 ---
-title: Wiki Index
-description: Catalogo del contenuto del modulo DbForge
-tags:
-  - index
-  - navigation
-created: 2026-04-15
+title: "Wiki Index"
+module: "DbForge"
+updated: "2026-04-15T08:28:41Z"
 ---
 
-# Wiki Index - DbForge
+# Wiki Index — DbForge
 
-Catalogo di tutto il contenuto della wiki del modulo.
-
-## Entities
-
-<!-- Pagine entità: modelli, azioni, servizi -->
+> **Purpose:** Content-oriented catalog of all wiki pages in this module.  
+> **Replaces embedding-based RAG at moderate scale (~100 sources).**
 
 ## Concepts
 
-<!-- Pagine concetto: pattern, architettura, flussi -->
+_No concepts ingested yet. Drop raw documents in `../raw/articles/` and run ingest._
+
+## Entities
+
+_No entities tracked yet._
 
 ## Sources
 
-<!-- Riferimenti documentazione esterna -->
+_No sources ingested yet._
 
-## Recent Updates
+## Comparisons
 
-Vedi [log.md](./log.md) per cronologia completa.
+_No comparisons synthesized yet._
+
+---
+
+**Last Updated:** 2026-04-15T08:28:41Z  
+**Total Pages:** 0  
+**Total Raw Sources:** 0
