@@ -1,32 +1,22 @@
 ---
-title: "Wiki Index"
+title: "DbForge Wiki Index"
 module: "DbForge"
-updated: "2026-04-15T08:28:41Z"
 ---
 
-# Wiki Index — DbForge
+# DbForge Module Wiki
 
-> **Purpose:** Content-oriented catalog of all wiki pages in this module.  
-> **Replaces embedding-based RAG at moderate scale (~100 sources).**
+## Indices
+- [Rules](rules/INDEX.md)
+- [Skills](skills/INDEX.md)
+- [Commands](commands/INDEX.md)
+- [Memories](memories/INDEX.md)
+- [Concepts](concepts/INDEX.md)
 
-## Concepts
+## On-Demand Workflow
 
-_No concepts ingested yet. Drop raw documents in `../raw/articles/` and run ingest._
-
-## Entities
-
-_No entities tracked yet._
-
-## Sources
-
-_No sources ingested yet._
-
-## Comparisons
-
-_No comparisons synthesized yet._
+```bash
+qmd search "DbForge <topic>" --limit 5
+```
 
 ---
-
-**Last Updated:** 2026-04-15T08:28:41Z  
-**Total Pages:** 0  
-**Total Raw Sources:** 0
+*Updated: 2026-05-11*
