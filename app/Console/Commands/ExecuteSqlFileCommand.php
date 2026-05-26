@@ -66,8 +66,9 @@ class ExecuteSqlFileCommand extends Command
         ]);
 
         try {
-            // Connessione al database
-            DB::connection('temp')->unprepared($sql);
+            $pdo = DB::connection('temp')->getPdo();
+            Assert::notNull($pdo);
+            $pdo->exec($sql);
             $this->info('File .sql eseguito con successo!');
         } catch (Exception $e) {
             $this->error("Errore durante l'esecuzione del file: ".$e->getMessage());

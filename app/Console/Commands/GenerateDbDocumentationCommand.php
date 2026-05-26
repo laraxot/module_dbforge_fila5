@@ -141,8 +141,13 @@ class GenerateDbDocumentationCommand extends Command
                 if (is_array($index)) {
                     $columns = 'N/A';
                     if (isset($index['columns']) && is_array($index['columns'])) {
-                        $columnNames = array_column($index['columns'], 'name');
-                        if (! empty($columnNames)) {
+                        $columnNames = [];
+                        foreach ($index['columns'] as $column) {
+                            if (is_array($column) && isset($column['name']) && is_string($column['name'])) {
+                                $columnNames[] = $column['name'];
+                            }
+                        }
+                        if ($columnNames !== []) {
                             $columns = implode(', ', $columnNames);
                         }
                     }

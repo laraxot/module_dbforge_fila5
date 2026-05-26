@@ -1,96 +1,56 @@
-# PHPStan Errori Modulo DbForge - 2025-01-22
+# phpstan — modulo dbforge
 
-## Analisi Completa
+## stato
 
-**Data Analisi**: 2025-01-22  
-**PHPStan Level**: 10  
-**Modulo**: DbForge  
-**Errori Trovati**: 3  
-**Errori Corretti**: 3 ✅
+| data | livello | errori | esito |
+|------|---------|--------|-------|
+| 2025-01-22 | 10 | 3 → 0 | fix `GenerateModelsFromSchemaCommand` (offset, var_export) |
+| 2026-05-21 | max | 12 → 0 | scan completo comandi console + bootstrap notify |
 
----
+**comando verifica:** `cd laravel && ./vendor/bin/phpstan analyse Modules/DbForge --no-progress`
 
-## Errori Identificati e Corretti
+## prerequisito bootstrap (2026-05-21)
 
-### 1. GenerateModelsFromSchemaCommand.php - Offset access
+PHPStan non partiva per marker merge `<<<<<<<` in `Modules/Notify/.../*Table.php`. Risolti prima dello scan DbForge (stesso pattern Activity: `getTableColumns()` istanza + `@return array<string, Column>`).
 
-**File**: `app/Console/Commands/GenerateModelsFromSchemaCommand.php`  
-**Linea**: 237
+## errori risolti (2026-05-21)
 
-**Errore**: `Offset 1 might not exist on array<string>|null.`
+### `DatabaseSchemaExporterCommand.php`
 
-**Causa**: `preg_match()` può ritornare `array<string>|null`, e `$matches[1]` potrebbe non esistere.
+- **problema:** `$output` indefinito; `OutputInterface` senza `createProgressBar()`.
+- **fix:** `$this->withProgressBar($tables, …)` (API Laravel tipizzata).
 
-**Correzione Applicata**:
-```php
-// Prima
-if (preg_match('/^(.+)_id$/', $fk['column'], $matches)) {
-    $methodName = Str::camel($matches[1]);
-}
+### `ExecuteSqlFileCommand.php`
 
-// Dopo
-if (preg_match('/^(.+)_id$/', $fk['column'], $matches) && isset($matches[1])) {
-    $methodName = Str::camel($matches[1]);
-}
-```
+- **problema:** `unprepared()` richiede `literal-string`; contenuto file `.sql` è `string` dinamica.
+- **fix:** `PDO::exec($sql)` su connessione temporanea (no `@phpstan-ignore`).
 
-### 2-3. GenerateModelsFromSchemaCommand.php - Encapsed string (2 occorrenze)
+### `GenerateDbDocumentationCommand.php`
 
-**File**: `app/Console/Commands/GenerateModelsFromSchemaCommand.php`  
-**Linee**: 309, 311
+- **problema:** `implode()` su `list` da `array_column()` non garantito `array<string>`.
+- **fix:** loop con filtro `is_string` su `column['name']`.
 
-**Errore**: `Part $fillableStr (array<string>|string) of encapsed string cannot be cast to string.`
+### `GenerateModelClassCommand.php`
 
-**Causa**: `preg_replace()` può ritornare `array<string>|string`, ma `var_export()` con `true` ritorna sempre `string`. PHPStan non lo riconosce automaticamente.
+- **problema:** `str_replace($getNamespace($name))` — variabile/callable errati, stub corrotto.
+- **fix:** `parent::replaceClass()` + placeholder `{{service_name}}` con namespace da `$this->getNamespace()`.
 
-**Correzione Applicata**:
-```php
-// Prima
-$fillableStr = (string) preg_replace('/^/m', '        ', var_export($fillable, true));
-$castsStr = (string) preg_replace('/^/m', '        ', var_export($casts, true));
+### `GenerateModelsFromSchemaCommand.php`
 
-// Dopo
-// var_export con return=true ritorna sempre string
-/** @var string $fillableExport */
-$fillableExport = var_export($fillable, true);
-$fillableStrRaw = preg_replace('/^/m', '        ', $fillableExport);
-Assert::string($fillableStrRaw, 'Failed to format fillable array');
-/** @var string $fillableStr */
-$fillableStr = $fillableStrRaw;
+- **problema:** offset `1` dopo `preg_match` non garantito.
+- **fix:** `isset($matches[1])` oltre a `=== 1`.
 
-// var_export con return=true ritorna sempre string
-/** @var string $castsExport */
-$castsExport = var_export($casts, true);
-$castsStrRaw = preg_replace('/^/m', '        ', $castsExport);
-Assert::string($castsStrRaw, 'Failed to format casts array');
-/** @var string $castsStr */
-$castsStr = $castsStrRaw;
-```
+## pattern da riusare
 
----
+1. **progress bar CLI:** preferire `$this->withProgressBar()` invece di cast su `getOutput()`.
+2. **SQL da file:** `PDO::exec()` per stringhe dinamiche; evitare `unprepared()` senza literal-string.
+3. **implode su colonne schema:** costruire `list<string>` esplicita, non `array_column` + `strval`.
+4. **generator stub:** allinearsi a `GeneratorCommand::replaceClass()` del framework.
 
-## Stato Correzioni
+## collegamenti
 
-✅ **TUTTI GLI ERRORI CORRETTI** - 2025-01-22
+- [second-brain.md](second-brain.md)
+- [phpstan modules inventory](../../../../docs/wiki/memories/phpstan-modules-inventory.md)
+- [phpstan usage](../../Xot/docs/phpstan-usage.md)
 
-- ✅ GenerateModelsFromSchemaCommand.php - Aggiunto controllo isset($matches[1])
-- ✅ GenerateModelsFromSchemaCommand.php - Aggiunto PHPDoc e Assert::string() per var_export
-
-**Risultato Finale**: 0 errori PHPStan livello 10 ✅
-
----
-
-## Pattern Applicato
-
-1. **Offset Access**: Sempre verificare `isset($matches[1])` dopo `preg_match()`
-2. **var_export()**: Annotare esplicitamente con PHPDoc `@var string` perché PHPStan non riconosce automaticamente che `var_export($data, true)` ritorna sempre `string`
-
----
-
-## Collegamenti
-
-- [PHPStan Usage](../../Xot/docs/phpstan-usage.md)
-- [Code Quality Standards](../../Xot/docs/code-quality-standards.md)
-
-*Ultimo aggiornamento: 2025-01-22*
-
+*ultimo aggiornamento: 2026-05-21*

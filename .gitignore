@@ -103,6 +103,8 @@ Thumbs.db
 *.old2
 *.backup
 *.backup.*
+*.backup-*
+*.backup_*
 *.bak
 *.bakcup
 *.new
