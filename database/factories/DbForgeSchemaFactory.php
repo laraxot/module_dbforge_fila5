@@ -5,22 +5,21 @@ declare(strict_types=1);
 namespace Modules\DbForge\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\DbForge\Models\DbForgeSchema;
 
 /**
  * DbForgeSchema factory.
  *
- * NOTE: Model not found - using stdClass temporarily
+ * @extends Factory<DbForgeSchema>
  */
 class DbForgeSchemaFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
-     * @var class-string
-     *
-     * @phpstan-ignore property.phpDocType
+     * @var class-string<DbForgeSchema>
      */
-    protected $model = \stdClass::class; // Using stdClass since DbForgeSchema model not found
+    protected $model = DbForgeSchema::class;
 
     /**
      * Define the model's default state.
