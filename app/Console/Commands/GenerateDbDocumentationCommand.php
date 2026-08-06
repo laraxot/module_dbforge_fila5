@@ -6,6 +6,7 @@ namespace Modules\DbForge\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Safe\Exceptions\JsonException;
 
 use function Safe\json_decode;
@@ -117,7 +118,7 @@ class GenerateDbDocumentationCommand extends Command
                 if (is_string($columnName) && is_array($column)) {
                     $type = isset($column['type']) && is_string($column['type']) ? $column['type'] : 'unknown';
                     $nullable = isset($column['nullable']) && $column['nullable'] ? 'Yes' : 'No';
-                    $default = isset($column['default']) ? (string) $column['default'] : 'NULL';
+                    $default = isset($column['default']) ? SafeStringCastAction::cast($column['default']) : 'NULL';
                     $comment = isset($column['comment']) && is_string($column['comment']) ? $column['comment'] : '';
 
                     $doc .= sprintf(

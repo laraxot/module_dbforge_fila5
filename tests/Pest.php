@@ -8,6 +8,8 @@ declare(strict_types=1);
  * Vietato pest()->extend() e expect()->extend() qui (PHPStan method.internalClass).
  */
 
+require_once __DIR__.'/../../Xot/tests/XotBasePest.php';
+
 /**
  * @param  array<string, mixed>  $attributes
  *
