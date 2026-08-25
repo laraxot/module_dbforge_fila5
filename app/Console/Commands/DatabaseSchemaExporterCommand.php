@@ -68,7 +68,11 @@ class DatabaseSchemaExporterCommand extends Command
             'connection' => $connection,
             'tables' => [],
         ];
+<<<<<<< HEAD
        $output = $this->getOutput();
+=======
+        $output = $this->getOutput();
+>>>>>>> laraxot/dev
         if (! $output instanceof OutputInterface) {
             throw new Exception('Output is not an instance of OutputInterface');
         }
@@ -127,7 +131,11 @@ class DatabaseSchemaExporterCommand extends Command
 
     /**
      * Ottieni informazioni dettagliate su una tabella.
+<<<<<<< HEAD
     *
+=======
+     *
+>>>>>>> laraxot/dev
      * @return array<string, mixed>
      */
     private function getTableInfo(string $connection, string $table): array
@@ -328,13 +336,21 @@ class DatabaseSchemaExporterCommand extends Command
 
     /**
      * Ottieni un campione di dati dalla tabella.
+<<<<<<< HEAD
     *
+=======
+     *
+>>>>>>> laraxot/dev
      * @return list<array<string, mixed>>
      */
     private function getTableSampleData(string $connection, string $table, int $limit = 5): array
     {
         try {
+<<<<<<< HEAD
            $rows = DB::connection($connection)->table($table)->limit($limit)->get()->all();
+=======
+            $rows = DB::connection($connection)->table($table)->limit($limit)->get()->all();
+>>>>>>> laraxot/dev
             $result = [];
 
             foreach ($rows as $row) {

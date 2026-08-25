@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> laraxot/dev
  * Bootstrap Pest — modulo DbForge.
  * Ogni file test dichiara uses(\Modules\DbForge\Tests\TestCase::class).
  * Per estendere si usa l'API idiomatica di Pest — `pest()->extend(...)`, in fondo
@@ -46,4 +50,8 @@ function makeDbForgeSchema(string $table = 'test_table'): array
         ],
     ];
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> laraxot/dev
 pest()->extend(\Modules\DbForge\Tests\TestCase::class)->in(__DIR__.'/Unit', __DIR__.'/Feature');

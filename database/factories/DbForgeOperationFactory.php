@@ -10,14 +10,22 @@ use Modules\DbForge\Models\DbForgeOperation;
 /**
  * DbForgeOperation factory.
  *
+<<<<<<< HEAD
 * @extends Factory<DbForgeOperation>
+=======
+ * @extends Factory<DbForgeOperation>
+>>>>>>> laraxot/dev
  */
 class DbForgeOperationFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
+<<<<<<< HEAD
     * @var class-string<DbForgeOperation>
+=======
+     * @var class-string<DbForgeOperation>
+>>>>>>> laraxot/dev
      */
     protected $model = DbForgeOperation::class;
 

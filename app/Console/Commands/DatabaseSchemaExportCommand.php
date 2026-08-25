@@ -53,7 +53,11 @@ class DatabaseSchemaExportCommand extends Command
 
         $tables = DB::select('SHOW TABLES');
         foreach ($tables as $tableObj) {
+<<<<<<< HEAD
            $tableName = SafeStringCastAction::cast(current((array) $tableObj));
+=======
+            $tableName = SafeStringCastAction::cast(current((array) $tableObj));
+>>>>>>> laraxot/dev
             $moduleString = is_string($module) ? $module : null;
             $this->exportTable($tableName, $moduleString);
         }
