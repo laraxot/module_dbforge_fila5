@@ -16,11 +16,7 @@ namespace Modules\DbForge\Models;
  * @property int $retention_days
  * @property int|null $created_by
  * @property \Illuminate\Support\Carbon|null $completed_at
-<<<<<<< HEAD
-* @property array<string, mixed>|null $metadata
-=======
  * @property array<string, mixed>|null $metadata
->>>>>>> laraxot/dev
  * @property array<string, mixed>|null $settings
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at

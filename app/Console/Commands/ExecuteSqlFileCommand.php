@@ -66,11 +66,7 @@ class ExecuteSqlFileCommand extends Command
         ]);
 
         try {
-<<<<<<< HEAD
-           $pdo = DB::connection('temp')->getPdo();
-=======
             $pdo = DB::connection('temp')->getPdo();
->>>>>>> laraxot/dev
             Assert::notNull($pdo);
             $pdo->exec($sql);
             $this->info('File .sql eseguito con successo!');

@@ -118,11 +118,7 @@ class GenerateDbDocumentationCommand extends Command
                 if (is_string($columnName) && is_array($column)) {
                     $type = isset($column['type']) && is_string($column['type']) ? $column['type'] : 'unknown';
                     $nullable = isset($column['nullable']) && $column['nullable'] ? 'Yes' : 'No';
-<<<<<<< HEAD
-                   $default = isset($column['default']) ? SafeStringCastAction::cast($column['default']) : 'NULL';
-=======
                     $default = isset($column['default']) ? SafeStringCastAction::cast($column['default']) : 'NULL';
->>>>>>> laraxot/dev
                     $comment = isset($column['comment']) && is_string($column['comment']) ? $column['comment'] : '';
 
                     $doc .= sprintf(
@@ -146,11 +142,7 @@ class GenerateDbDocumentationCommand extends Command
                 if (is_array($index)) {
                     $columns = 'N/A';
                     if (isset($index['columns']) && is_array($index['columns'])) {
-<<<<<<< HEAD
-                       $columnNames = [];
-=======
                         $columnNames = [];
->>>>>>> laraxot/dev
                         foreach ($index['columns'] as $column) {
                             if (is_array($column) && isset($column['name']) && is_string($column['name'])) {
                                 $columnNames[] = $column['name'];

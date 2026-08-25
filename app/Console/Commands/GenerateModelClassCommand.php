@@ -36,11 +36,7 @@ class GenerateModelClassCommand extends GeneratorCommand
 
     protected function replaceClass($stub, $name)
     {
-<<<<<<< HEAD
-       $class = str_replace($this->getNamespace($name).'\\', '', $name);
-=======
         $class = str_replace($this->getNamespace($name).'\\', '', $name);
->>>>>>> laraxot/dev
 
         return str_replace('{{service_name}}', $class, parent::replaceClass($stub, $name));
     }
