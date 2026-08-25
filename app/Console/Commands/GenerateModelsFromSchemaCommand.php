@@ -41,7 +41,7 @@ class GenerateModelsFromSchemaCommand extends Command
      *
      * @var array<string, string>
      */
-    protected $typeMappings = [
+    protected array $typeMappings = [
         'int' => 'integer',
         'tinyint' => 'boolean',
         'smallint' => 'integer',

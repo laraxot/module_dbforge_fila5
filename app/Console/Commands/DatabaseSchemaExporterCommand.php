@@ -113,7 +113,7 @@ class DatabaseSchemaExporterCommand extends Command
         $tables = DB::connection($connection)
             ->select("SELECT table_name FROM information_schema.tables WHERE table_schema = ? AND table_type = 'BASE TABLE'", [$databaseName]);
 
-        return array_values(array_filter(array_map(function ($table): ?string {
+        return array_values(array_filter(array_map(function (mixed $table): ?string {
             // ✅ isset() invece di property_exists per oggetti stdClass (più sicuro)
             if (! is_object($table) || ! isset($table->table_name)) {
                 return null;
