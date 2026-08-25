@@ -10,14 +10,22 @@ use Modules\DbForge\Models\DbForgeQueryLog;
 /**
  * DbForgeQueryLog factory.
  *
+<<<<<<< HEAD
+* @extends Factory<DbForgeQueryLog>
+=======
  * @extends Factory<DbForgeQueryLog>
+>>>>>>> laraxot/dev
  */
 class DbForgeQueryLogFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
+<<<<<<< HEAD
+    * @var class-string<DbForgeQueryLog>
+=======
      * @var class-string<DbForgeQueryLog>
+>>>>>>> laraxot/dev
      */
     protected $model = DbForgeQueryLog::class;
 

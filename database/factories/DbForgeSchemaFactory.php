@@ -10,14 +10,22 @@ use Modules\DbForge\Models\DbForgeSchema;
 /**
  * DbForgeSchema factory.
  *
+<<<<<<< HEAD
+* @extends Factory<DbForgeSchema>
+=======
  * @extends Factory<DbForgeSchema>
+>>>>>>> laraxot/dev
  */
 class DbForgeSchemaFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
+<<<<<<< HEAD
+    * @var class-string<DbForgeSchema>
+=======
      * @var class-string<DbForgeSchema>
+>>>>>>> laraxot/dev
      */
     protected $model = DbForgeSchema::class;
 
