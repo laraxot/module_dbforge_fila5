@@ -16,12 +16,12 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with:
           ref: ${{ github.head_ref }}
 
       - name: "Duster Fix"
-        uses: tighten/duster-action@v2
+        uses: tighten/duster-action@v3
         with:
           args: fix
 

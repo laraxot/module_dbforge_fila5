@@ -18,17 +18,14 @@ class GetSchemaManagerByModelClassAction
      * Ottiene lo schema manager Doctrine per una classe di modello Eloquent.
      *
      * @param  string  $modelClass  La classe del modello
-     * @return AbstractSchemaManager Lo schema manager di Doctrine
+    * @return AbstractSchemaManager<\Doctrine\DBAL\Platforms\AbstractPlatform> Lo schema manager di Doctrine
      */
     public function execute(string $modelClass): AbstractSchemaManager
     {
         Assert::isInstanceOf($model = app($modelClass), EloquentModel::class);
         $connection = $model->getConnection();
 
-        // In Laravel 9+ il metodo getDoctrineSchemaManager è stato deprecato
-        // ma getDoctrineConnection() non esiste, dobbiamo usare getDoctrineSchemaManager direttamente
-        if (method_exists($connection, 'getDoctrineSchemaManager')) {
-            /** @phpstan-ignore deprecated.method */
+       if (method_exists($connection, 'getDoctrineSchemaManager')) {
             $schemaManager = $connection->getDoctrineSchemaManager();
             Assert::isInstanceOf($schemaManager, AbstractSchemaManager::class);
 

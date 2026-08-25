@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\Console\Output\OutputInterface;
 
 use function Safe\json_encode;
 
@@ -67,7 +68,10 @@ class DatabaseSchemaExporterCommand extends Command
             'connection' => $connection,
             'tables' => [],
         ];
-
+       $output = $this->getOutput();
+        if (! $output instanceof OutputInterface) {
+            throw new Exception('Output is not an instance of OutputInterface');
+        }
         $progressBar = $output->createProgressBar(count($tables));
         $progressBar->start();
 
@@ -123,6 +127,8 @@ class DatabaseSchemaExporterCommand extends Command
 
     /**
      * Ottieni informazioni dettagliate su una tabella.
+    *
+     * @return array<string, mixed>
      */
     private function getTableInfo(string $connection, string $table): array
     {
@@ -322,11 +328,33 @@ class DatabaseSchemaExporterCommand extends Command
 
     /**
      * Ottieni un campione di dati dalla tabella.
+    *
+     * @return list<array<string, mixed>>
      */
     private function getTableSampleData(string $connection, string $table, int $limit = 5): array
     {
         try {
-            return DB::connection($connection)->table($table)->limit($limit)->get()->toArray();
+           $rows = DB::connection($connection)->table($table)->limit($limit)->get()->all();
+            $result = [];
+
+            foreach ($rows as $row) {
+                if (! is_object($row)) {
+                    continue;
+                }
+
+                $item = [];
+                foreach (get_object_vars($row) as $key => $value) {
+                    if (! is_string($key)) {
+                        continue;
+                    }
+
+                    $item[$key] = $value;
+                }
+
+                $result[] = $item;
+            }
+
+            return $result;
         } catch (Exception $e) {
             $this->warn("Impossibile ottenere dati di esempio per la tabella {$table}: ".$e->getMessage());
 

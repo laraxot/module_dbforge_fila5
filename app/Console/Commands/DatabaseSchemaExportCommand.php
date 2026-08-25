@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema as SchemaFacade;
 use Illuminate\Support\Str;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 use Safe\Exceptions\FilesystemException;
 use Safe\Exceptions\JsonException;
 
@@ -52,7 +53,7 @@ class DatabaseSchemaExportCommand extends Command
 
         $tables = DB::select('SHOW TABLES');
         foreach ($tables as $tableObj) {
-            $tableName = (string) current((array) $tableObj);
+           $tableName = SafeStringCastAction::cast(current((array) $tableObj));
             $moduleString = is_string($module) ? $module : null;
             $this->exportTable($tableName, $moduleString);
         }

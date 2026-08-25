@@ -5,22 +5,21 @@ declare(strict_types=1);
 namespace Modules\DbForge\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\DbForge\Models\DbForgeQueryLog;
 
 /**
  * DbForgeQueryLog factory.
  *
- * NOTE: Model not found - using stdClass temporarily
+* @extends Factory<DbForgeQueryLog>
  */
 class DbForgeQueryLogFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
-     * @var class-string
-     *
-     * @phpstan-ignore property.phpDocType
+    * @var class-string<DbForgeQueryLog>
      */
-    protected $model = \stdClass::class; // Using stdClass since DbForgeQueryLog model not found
+    protected $model = DbForgeQueryLog::class;
 
     /**
      * Define the model's default state.
