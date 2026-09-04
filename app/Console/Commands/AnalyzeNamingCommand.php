@@ -312,10 +312,9 @@ class AnalyzeNamingCommand extends Command
             return [];
         }
 
-        /** @var array<int, mixed> $columnsRaw */
+        /** @var list<string> $columnsRaw */
         $columnsRaw = Schema::getColumnListing($table);
-        /** @var list<string> $columns */
-        $columns = array_values(array_filter($columnsRaw, static fn (mixed $column): bool => is_string($column) && $column !== ''));
+        $columns = array_values(array_filter($columnsRaw, static fn (string $column): bool => $column !== ''));
 
         $issues = [];
 

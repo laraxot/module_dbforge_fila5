@@ -58,6 +58,7 @@ class GenerateDbDocumentationCommand extends Command
             return 1;
         }
 
+        /** @var array<string, mixed> $formDecoded */
         $documentation = $this->generateDocumentation($formDecoded);
 
         File::put($outputPath, $documentation);
@@ -69,7 +70,7 @@ class GenerateDbDocumentationCommand extends Command
     /**
      * Generate documentation from schema.
      *
-     * @param  array<mixed, mixed>  $form
+     * @param  array<string, mixed>  $form
      */
     protected function generateDocumentation(array $form): string
     {
@@ -79,6 +80,7 @@ class GenerateDbDocumentationCommand extends Command
         if (isset($form['tables']) && is_array($form['tables'])) {
             foreach ($form['tables'] as $tableName => $table) {
                 if (is_string($tableName) && is_array($table)) {
+                    /** @var array<string, mixed> $table */
                     $doc .= $this->generateTableDocumentation($tableName, $table);
                 }
             }
@@ -88,6 +90,7 @@ class GenerateDbDocumentationCommand extends Command
             $doc .= "\n## Relationships\n\n";
             foreach ($form['relationships'] as $relationship) {
                 if (is_array($relationship)) {
+                    /** @var array<string, mixed> $relationship */
                     $doc .= $this->generateRelationshipDocumentation($relationship);
                 }
             }
@@ -99,7 +102,7 @@ class GenerateDbDocumentationCommand extends Command
     /**
      * Generate documentation for a table.
      *
-     * @param  array<mixed, mixed>  $table
+     * @param  array<string, mixed>  $table
      */
     protected function generateTableDocumentation(string $tableName, array $table): string
     {
@@ -195,7 +198,7 @@ class GenerateDbDocumentationCommand extends Command
     /**
      * Generate documentation for a relationship.
      *
-     * @param  array<mixed, mixed>  $relationship
+     * @param  array<string, mixed>  $relationship
      */
     protected function generateRelationshipDocumentation(array $relationship): string
     {
