@@ -19,6 +19,9 @@ namespace Modules\DbForge\Models;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeQueryLog newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeQueryLog newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeQueryLog query()
+ * @property-read \Modules\Quaeris\Models\Profile|null $creator
+ * @property-read \Modules\Quaeris\Models\Profile|null $deleter
+ * @property-read \Modules\Quaeris\Models\Profile|null $updater
  * @mixin \Eloquent
  */
 class DbForgeQueryLog extends BaseModel

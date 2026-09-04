@@ -20,6 +20,8 @@ namespace Modules\DbForge\Models;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeSchema newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeSchema newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeSchema query()
+ * @property-read \Modules\Quaeris\Models\Profile|null $deleter
+ * @property-read \Modules\Quaeris\Models\Profile|null $updater
  * @mixin \Eloquent
  */
 class DbForgeSchema extends BaseModel

@@ -22,6 +22,8 @@ namespace Modules\DbForge\Models;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeOperation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeOperation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeOperation query()
+ * @property-read \Modules\Quaeris\Models\Profile|null $deleter
+ * @property-read \Modules\Quaeris\Models\Profile|null $updater
  * @mixin \Eloquent
  */
 class DbForgeOperation extends BaseModel
