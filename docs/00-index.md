@@ -13,7 +13,7 @@
 
 - **[Wiki Index](./wiki/index.md)** - Struttura e concetti chiave.
 - **[Schema](./wiki/schema.md)** - Definizione dello schema relazionale.
-- **[BMAD Method](./wiki/bmad-method.md)** - Applicazione del metodo BMAD.
+- **[Tasks](./tasks/tasks-index.md)** - Indice task.
 
 ## 📦 Pacchetti Composer
 
