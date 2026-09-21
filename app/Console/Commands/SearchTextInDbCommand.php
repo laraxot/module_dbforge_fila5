@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\DbForge\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
@@ -89,10 +90,12 @@ class SearchTextInDbCommand extends Command
                 if ($results->isNotEmpty()) {
                     $this->info("Found in column: {$column}");
                     foreach ($results as $result) {
+                        /** @var Collection<int|string, array<array-key, mixed>|bool|float|int|string|null> $rowValues */
+                        $rowValues = collect((array) $result);
                         $this->table(
                             ['Column', 'Value'],
-                            collect((array) $result)
-                                ->map(fn (mixed $value, int|string $key) => [
+                            $rowValues
+                                ->map(fn (array|bool|float|int|string|null $value, int|string $key) => [
                                     (string) $key,
                                     is_scalar($value) ? (string) $value : json_encode($value),
                                 ])

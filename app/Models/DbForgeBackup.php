@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\DbForge\Models;
 
+use Illuminate\Support\Carbon;
+use Modules\Xot\Contracts\ProfileContract;
+
 /**
  * DbForgeBackup model.
  *
@@ -15,18 +18,20 @@ namespace Modules\DbForge\Models;
  * @property string $status
  * @property int $retention_days
  * @property int|null $created_by
- * @property \Illuminate\Support\Carbon|null $completed_at
+ * @property Carbon|null $completed_at
  * @property array<string, mixed>|null $metadata
  * @property array<string, mixed>|null $settings
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
- * @property-read \Modules\Xot\Contracts\ProfileContract|null $deleter
- * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read ProfileContract|null $creator
+ * @property-read ProfileContract|null $deleter
+ * @property-read ProfileContract|null $updater
+ *
  * @method static \Modules\DbForge\Database\Factories\DbForgeBackupFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeBackup newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeBackup newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeBackup query()
+ *
  * @mixin \Eloquent
  */
 class DbForgeBackup extends BaseModel

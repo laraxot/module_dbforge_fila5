@@ -10,14 +10,14 @@ use Modules\DbForge\Models\DbForgeBackup;
 /**
  * DbForgeBackup factory.
  *
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\DbForge\Models\DbForgeBackup>
+ * @extends Factory<DbForgeBackup>
  */
 class DbForgeBackupFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
-     * @var class-string<\Modules\DbForge\Models\DbForgeBackup>
+     * @var class-string<DbForgeBackup>
      */
     protected $model = DbForgeBackup::class;
 

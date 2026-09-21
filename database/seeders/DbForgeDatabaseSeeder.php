@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\DbForge\Database\Seeders;
 
 use Illuminate\Database\Seeder;

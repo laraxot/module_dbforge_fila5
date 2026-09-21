@@ -4,7 +4,7 @@ module: "DbForge"
 type: concept
 tags: [coverage, phpstan, mixed-type]
 created: 2026-09-04
-updated: 2026-09-04
+updated: 2026-09-21
 qmd: "coverage"
 ---
 
@@ -65,3 +65,32 @@ test files) — there is no suite to run for this module.
 **Git**: `app/Console/Commands/AnalyzeNamingCommand.php` and
 `app/Console/Commands/GenerateDbDocumentationCommand.php` changed; committed and
 pushed to the module's own `laraxot` remote (`dev` branch).
+
+## 2026-09-21 — `declare(strict_types=1)` su lang + re-audit mixed
+
+**Perché**: i file `lang/**/*.php` senza `declare` restano fuori dal contratto
+strict del modulo; `config.php`, `routes/web.php`, `routes/api.php` e
+`database/seeders/DbForgeDatabaseSeeder.php` avevano già `declare` (parent) e
+non sono stati riaperti.
+
+**Lang**: inserito `declare(strict_types=1);` subito dopo `<?php` su **109**
+file `lang/**/*.php` che ne erano privi (9 `lang/it/*.php` lo avevano già).
+`php -l` su tutto `lang/`: 0 errori.
+
+**Mixed in `app/`**: re-letti i native `mixed` residui. Nessuno è abbastanza
+evidente da restringere senza cambiare il comportamento difensivo già
+documentato sopra (`DatabaseSchemaExporterCommand::getTables` filtra righe
+non-object; `SearchTextInDbCommand` mappa valori colonna eterogenei;
+JSON/`definition()` restano polimorfi). Nessun file `app/` toccato.
+
+## 2026-09-21 — follow-up `declare` sulle 2 viste
+
+**Perché**: il layout master e l'index sono l'unico HTML del modulo. Lo
+strict su lang/config non copre le viste: senza prepend, `config('dbforge.name')`
+e `app()->getLocale()` restano in coercion. Nessun `app/` riaperto.
+
+**Fatto** (prepend, `<x-dbforge::layouts.master>` e `<!DOCTYPE` intatti):
+- `resources/views/index.blade.php`
+- `resources/views/components/layouts/master.blade.php`
+
+`php -l`: 0 errori.

@@ -290,9 +290,6 @@ class GenerateModelsFromSchemaCommand extends Command
 
         return <<<PHP
 <?php
-
-declare(strict_types=1);
-
 namespace {$namespace};
 
 use Illuminate\Database\Eloquent\Model;

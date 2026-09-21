@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+use Modules\DbForge\Tests\TestCase;
 
 /*
  * Bootstrap Pest — modulo DbForge.
@@ -17,7 +18,6 @@ declare(strict_types=1);
 
 /**
  * @param  array<string, mixed>  $attributes
- *
  * @return array<string, mixed>
  */
 function createDbForgeConnection(array $attributes = []): array
@@ -46,4 +46,4 @@ function makeDbForgeSchema(string $table = 'test_table'): array
         ],
     ];
 }
-pest()->extend(\Modules\DbForge\Tests\TestCase::class)->in(__DIR__.'/Unit', __DIR__.'/Feature');
+pest()->extend(TestCase::class)->in(__DIR__.'/Unit', __DIR__.'/Feature');

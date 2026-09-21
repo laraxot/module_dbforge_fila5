@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\DbForge\Models;
 
+use Illuminate\Support\Carbon;
+use Modules\Quaeris\Models\Profile;
+
 /**
  * DbForgeQueryLog model.
  *
@@ -13,15 +16,18 @@ namespace Modules\DbForge\Models;
  * @property float|null $query_time
  * @property int|null $user_id
  * @property string|null $connection_name
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ *
  * @method static \Modules\DbForge\Database\Factories\DbForgeQueryLogFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeQueryLog newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeQueryLog newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeQueryLog query()
- * @property-read \Modules\Quaeris\Models\Profile|null $creator
- * @property-read \Modules\Quaeris\Models\Profile|null $deleter
- * @property-read \Modules\Quaeris\Models\Profile|null $updater
+ *
+ * @property-read Profile|null $creator
+ * @property-read Profile|null $deleter
+ * @property-read Profile|null $updater
+ *
  * @mixin \Eloquent
  */
 class DbForgeQueryLog extends BaseModel

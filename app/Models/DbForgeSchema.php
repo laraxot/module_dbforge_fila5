@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\DbForge\Models;
 
+use Illuminate\Support\Carbon;
+use Modules\Quaeris\Models\Profile;
+use Modules\Xot\Contracts\ProfileContract;
+
 /**
  * DbForgeSchema model.
  *
@@ -13,15 +17,18 @@ namespace Modules\DbForge\Models;
  * @property array<string, mixed>|null $schema_definition
  * @property string $status
  * @property int|null $created_by
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read ProfileContract|null $creator
+ *
  * @method static \Modules\DbForge\Database\Factories\DbForgeSchemaFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeSchema newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeSchema newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeSchema query()
- * @property-read \Modules\Quaeris\Models\Profile|null $deleter
- * @property-read \Modules\Quaeris\Models\Profile|null $updater
+ *
+ * @property-read Profile|null $deleter
+ * @property-read Profile|null $updater
+ *
  * @mixin \Eloquent
  */
 class DbForgeSchema extends BaseModel

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\DbForge\Models;
 
+use Illuminate\Support\Carbon;
+use Modules\Xot\Contracts\ProfileContract;
+
 /**
  * DbForgeMigration model.
  *
@@ -14,18 +17,20 @@ namespace Modules\DbForge\Models;
  * @property string $status
  * @property string|null $batch
  * @property int|null $created_by
- * @property \Illuminate\Support\Carbon|null $executed_at
+ * @property Carbon|null $executed_at
  * @property array<string, mixed>|null $metadata
  * @property array<string, mixed>|null $settings
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
- * @property-read \Modules\Xot\Contracts\ProfileContract|null $deleter
- * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read ProfileContract|null $creator
+ * @property-read ProfileContract|null $deleter
+ * @property-read ProfileContract|null $updater
+ *
  * @method static \Modules\DbForge\Database\Factories\DbForgeMigrationFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeMigration newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeMigration newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeMigration query()
+ *
  * @mixin \Eloquent
  */
 class DbForgeMigration extends BaseModel

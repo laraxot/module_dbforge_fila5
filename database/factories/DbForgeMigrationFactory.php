@@ -10,14 +10,14 @@ use Modules\DbForge\Models\DbForgeMigration;
 /**
  * DbForgeMigration factory.
  *
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\DbForge\Models\DbForgeMigration>
+ * @extends Factory<DbForgeMigration>
  */
 class DbForgeMigrationFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
-     * @var class-string<\Modules\DbForge\Models\DbForgeMigration>
+     * @var class-string<DbForgeMigration>
      */
     protected $model = DbForgeMigration::class;
 
