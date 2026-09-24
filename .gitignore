@@ -171,3 +171,8 @@ public_html
 *.rej
 *~head
 
+
+# Artefatti audit vietati (rule: tests-auditcoverage-forbidden)
+tests/AuditCoverage/
+audit-coverage/
+.claude-audit/
