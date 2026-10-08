@@ -9,10 +9,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
 
 use function Safe\preg_match;
 
+/**
+ * @phpstan-type NamingRule array{incorrect: list<string>, correct: list<string>, message: string}
+ * @phpstan-type TableIssue array{column: string, issue: string, correct: string}
+ * @phpstan-type FileIssue array{field: string, location: string, issue: string, correct: string}
+ * @phpstan-type FileIssueReport list<FileIssue>
+ */
 class AnalyzeNamingCommand extends Command
 {
     /** @var array<string, array{incorrect: list<string>, correct: list<string>, message: string}> */
@@ -136,64 +141,65 @@ class AnalyzeNamingCommand extends Command
         }
     }
 
-    private function analyzeModuleModelsNaming(string $moduleName, string $modulePath): void
+    /**
+     * @param  \Closure(string): FileIssueReport  $detector
+     */
+    private function analyzeModuleFileNaming(string $moduleName, string $modulePath, string $subPath, string $pattern, string $label, \Closure $detector): void
     {
         $this->info(" - Modulo: {$moduleName}");
-
-        $modelsPath = $modulePath.'/app/Models';
-        if (! File::exists($modelsPath)) {
-            $this->line('   - Directory Models non trovata');
+        $targetPath = $modulePath.'/app/'.$subPath;
+        if (! File::exists($targetPath)) {
+            $this->line('   - Directory '.basename($subPath).' non trovata');
             $this->newLine();
 
             return;
         }
 
-        $finder = Finder::create()->files()->in($modelsPath)->name('*.php');
+        $finder = Finder::create()->files()->in($targetPath)->name($pattern);
         if (! $finder->hasResults()) {
-            $this->line('   - Nessun modello trovato');
+            $this->line('   - Nessun '.strtolower($label).' trovato');
             $this->newLine();
 
             return;
         }
 
-        /** @var array<string, list<array{field: string, location: string, issue: string, correct: string}>> $issuesFound */
+        /** @var array<string, FileIssueReport> $issuesFound */
         $issuesFound = [];
-
-        /** @var SplFileInfo $file */
         foreach ($finder as $file) {
             $content = $file->getContents();
-            if (! is_string($content)) {
-                continue;
-            }
-
-            $modelName = $file->getRelativePathname();
-            $modelIssues = $this->detectModelIssues($content);
-
-            if ($modelIssues !== []) {
-                $issuesFound[$modelName] = $modelIssues;
+            $name = $file->getRelativePathname();
+            $issues = $detector($content);
+            if ($issues !== []) {
+                $issuesFound[$name] = $issues;
             }
         }
 
         if ($issuesFound !== []) {
             $this->warn('   - Problemi di naming trovati:');
-
-            foreach ($issuesFound as $model => $issues) {
-                $this->line('     Modello: '.$model);
-
+            foreach ($issuesFound as $name => $issues) {
+                $this->line('     '.ucfirst($label).': '.$name);
                 foreach ($issues as $issue) {
-                    /** @var array{field: string, location: string, issue: string, correct: string} $issue */
-                    $this->line('       - Campo: '.$issue['field'].' ('.$issue['location'].')');
+                    $linePrefix = '       - Campo: '.$issue['field'].' ('.$issue['location'].')';
+                    $this->line($linePrefix);
                     $this->line('         Problema: '.$issue['issue']);
                     $this->line('         Correzione suggerita: '.$issue['correct']);
                 }
             }
-
-            $this->info('   - Suggerimento: Aggiornare i modelli per utilizzare i nomi dei campi corretti');
+            $this->info('   - Suggerimento: Aggiornare i '.strtolower($label).' per utilizzare i nomi dei campi corretti');
         } else {
-            $this->info('   - Nessun problema di naming trovato nei modelli analizzati');
+            $this->info('   - Nessun problema di naming trovato nei '.strtolower($label).' analizzati');
         }
-
         $this->newLine();
+    }
+
+    private function analyzeModuleModelsNaming(string $moduleName, string $modulePath): void
+    {
+        $this->analyzeModuleFileNaming($moduleName, $modulePath, 'Models', '*.php', 'modello', fn (string $content): array => $this->detectModelIssues($content));
+    }
+
+    private function analyzeModuleControllersNaming(string $moduleName, string $modulePath): void
+    {
+        $this->analyzeModuleFileNaming($moduleName, $modulePath, 'Http/Controllers', '*Controller.php', 'controller', fn (string $content): array => $this->detectControllerIssues($content));
     }
 
     private function analyzeControllersNaming(?string $module): void
@@ -206,66 +212,6 @@ class AnalyzeNamingCommand extends Command
         foreach ($moduleDirectories as $moduleName => $modulePath) {
             $this->analyzeModuleControllersNaming($moduleName, $modulePath);
         }
-    }
-
-    private function analyzeModuleControllersNaming(string $moduleName, string $modulePath): void
-    {
-        $this->info(" - Modulo: {$moduleName}");
-
-        $controllersPath = $modulePath.'/app/Http/Controllers';
-        if (! File::exists($controllersPath)) {
-            $this->line('   - Directory Controllers non trovata');
-            $this->newLine();
-
-            return;
-        }
-
-        $finder = Finder::create()->files()->in($controllersPath)->name('*Controller.php');
-        if (! $finder->hasResults()) {
-            $this->line('   - Nessun controller trovato');
-            $this->newLine();
-
-            return;
-        }
-
-        /** @var array<string, list<array{field: string, location: string, issue: string, correct: string}>> $issuesFound */
-        $issuesFound = [];
-
-        /** @var SplFileInfo $file */
-        foreach ($finder as $file) {
-            $content = $file->getContents();
-            if (! is_string($content)) {
-                continue;
-            }
-
-            $controllerName = $file->getRelativePathname();
-            $controllerIssues = $this->detectControllerIssues($content);
-
-            if ($controllerIssues !== []) {
-                $issuesFound[$controllerName] = $controllerIssues;
-            }
-        }
-
-        if ($issuesFound !== []) {
-            $this->warn('   - Problemi di naming trovati:');
-
-            foreach ($issuesFound as $controller => $issues) {
-                $this->line('     Controller: '.$controller);
-
-                foreach ($issues as $issue) {
-                    /** @var array{field: string, location: string, issue: string, correct: string} $issue */
-                    $this->line('       - Campo: '.$issue['field']);
-                    $this->line('         Problema: '.$issue['issue']);
-                    $this->line('         Correzione suggerita: '.$issue['correct']);
-                }
-            }
-
-            $this->info('   - Suggerimento: Aggiornare i controller per utilizzare i nomi dei campi corretti');
-        } else {
-            $this->info('   - Nessun problema di naming trovato nei controller analizzati');
-        }
-
-        $this->newLine();
     }
 
     /**
@@ -303,9 +249,7 @@ class AnalyzeNamingCommand extends Command
         return $filtered;
     }
 
-    /**
-     * @return list<array{column: string, issue: string, correct: string}>
-     */
+    /** @return list<TableIssue> */
     private function analyzeTableIssues(string $table): array
     {
         if (! Schema::hasTable($table)) {
@@ -320,7 +264,7 @@ class AnalyzeNamingCommand extends Command
 
         foreach ($columns as $column) {
             foreach ($this->namingConventions as $rule) {
-                /** @var array{incorrect: list<string>, correct: list<string>, message: string} $rule */
+                /** @var NamingRule $rule */
                 $issues = array_merge($issues, $this->evaluateColumnAgainstRule($column, $rule));
             }
         }
@@ -329,8 +273,8 @@ class AnalyzeNamingCommand extends Command
     }
 
     /**
-     * @param  array{incorrect: list<string>, correct: list<string>, message: string}  $rule
-     * @return list<array{column: string, issue: string, correct: string}>
+     * @param  NamingRule  $rule
+     * @return list<TableIssue>
      */
     private function evaluateColumnAgainstRule(string $column, array $rule): array
     {
@@ -339,14 +283,14 @@ class AnalyzeNamingCommand extends Command
         foreach ($rule['incorrect'] as $incorrect) {
             if ($this->isRegexPattern($incorrect)) {
                 if (preg_match($incorrect, $column) === 1) {
-                    $issues[] = $this->makeTableIssue($column, $rule['message'], $this->getCorrectFieldPattern($column, $rule));
+                    $issues[] = ['column' => $column, 'issue' => $rule['message'], 'correct' => $this->getCorrectFieldPattern($column, $rule)];
                 }
 
                 continue;
             }
 
             if ($column === $incorrect) {
-                $issues[] = $this->makeTableIssue($column, $rule['message'], $this->getCorrectField($column, $rule));
+                $issues[] = ['column' => $column, 'issue' => $rule['message'], 'correct' => $this->getCorrectField($column, $rule)];
             }
         }
 
@@ -354,7 +298,7 @@ class AnalyzeNamingCommand extends Command
     }
 
     /**
-     * @return list<array{field: string, location: string, issue: string, correct: string}>
+     * @return FileIssueReport
      */
     private function detectModelIssues(string $content): array
     {
@@ -373,7 +317,7 @@ class AnalyzeNamingCommand extends Command
                 if (preg_match('/protected\s+\$fillable\s*=\s*\[(.*?)\]/s', $content, $fillableMatches) === 1) {
                     $fillableBody = (string) ($fillableMatches[1] ?? '');
                     if ($this->stringContainsField($fillableBody, $incorrect)) {
-                        $issues[] = $this->makeModelIssue($incorrect, 'fillable', $message, $this->getCorrectField($incorrect, $rule));
+                        $issues[] = ['field' => $incorrect, 'location' => 'fillable', 'issue' => $message, 'correct' => $this->getCorrectField($incorrect, $rule)];
                     }
                 }
 
@@ -381,7 +325,7 @@ class AnalyzeNamingCommand extends Command
                 if (preg_match('/protected\s+\$casts\s*=\s*\[(.*?)\]/s', $content, $castsMatches) === 1) {
                     $castsBody = (string) ($castsMatches[1] ?? '');
                     if ($this->stringContainsField($castsBody, $incorrect)) {
-                        $issues[] = $this->makeModelIssue($incorrect, 'casts', $message, $this->getCorrectField($incorrect, $rule));
+                        $issues[] = ['field' => $incorrect, 'location' => 'casts', 'issue' => $message, 'correct' => $this->getCorrectField($incorrect, $rule)];
                     }
                 }
 
@@ -389,7 +333,7 @@ class AnalyzeNamingCommand extends Command
                 $mutatorPattern = '/function\s+set'.preg_quote(ucfirst($incorrect), '/').'Attribute/';
 
                 if (preg_match($accessorPattern, $content) === 1 || preg_match($mutatorPattern, $content) === 1) {
-                    $issues[] = $this->makeModelIssue($incorrect, 'accessor/mutator', $message, $this->getCorrectField($incorrect, $rule));
+                    $issues[] = ['field' => $incorrect, 'location' => 'accessor/mutator', 'issue' => $message, 'correct' => $this->getCorrectField($incorrect, $rule)];
                 }
             }
         }
@@ -398,7 +342,7 @@ class AnalyzeNamingCommand extends Command
     }
 
     /**
-     * @return list<array{field: string, location: string, issue: string, correct: string}>
+     * @return FileIssueReport
      */
     private function detectControllerIssues(string $content): array
     {
@@ -420,7 +364,7 @@ class AnalyzeNamingCommand extends Command
                 ];
 
                 if ($this->matchesAnyPattern($content, $patterns)) {
-                    $issues[] = $this->makeModelIssue($incorrect, 'controller', $message, $this->getCorrectField($incorrect, $rule));
+                    $issues[] = ['field' => $incorrect, 'location' => 'controller', 'issue' => $message, 'correct' => $this->getCorrectField($incorrect, $rule)];
                 }
             }
         }
@@ -484,38 +428,13 @@ class AnalyzeNamingCommand extends Command
         return $directories;
     }
 
-    /**
-     * @return array{column: string, issue: string, correct: string}
-     */
-    private function makeTableIssue(string $column, string $message, string $suggestion): array
-    {
-        return [
-            'column' => $column,
-            'issue' => $message,
-            'correct' => $suggestion,
-        ];
-    }
-
-    /**
-     * @return array{field: string, location: string, issue: string, correct: string}
-     */
-    private function makeModelIssue(string $field, string $location, string $message, string $suggestion): array
-    {
-        return [
-            'field' => $field,
-            'location' => $location,
-            'issue' => $message,
-            'correct' => $suggestion,
-        ];
-    }
-
     private function isRegexPattern(string $value): bool
     {
         return str_starts_with($value, '/') && str_ends_with($value, '/');
     }
 
     /**
-     * @param  array{incorrect: list<string>, correct: list<string>, message: string}  $rules
+     * @param  NamingRule  $rules
      */
     private function getCorrectField(string $incorrectField, array $rules): string
     {
@@ -546,7 +465,7 @@ class AnalyzeNamingCommand extends Command
     }
 
     /**
-     * @param  array{incorrect: list<string>, correct: list<string>, message: string}  $rules
+     * @param  NamingRule  $rules
      */
     private function getCorrectFieldPattern(string $incorrectField, array $rules): string
     {
