@@ -380,7 +380,7 @@ class DatabaseSchemaExporterCommand extends Command
 
             $foreignKeys = $this->getTableForeignKeys($connection, $table);
 
-            foreach ($foreignKeys as $name => $foreignKey) {
+            foreach ($foreignKeys as $foreignKey) {
                 if (! is_array($foreignKey)) {
                     continue;
                 }
