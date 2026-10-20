@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Modules\DbForge\Actions\Model;
 
+use LogicException;
 use Spatie\QueueableAction\QueueableAction;
 
 class GenerateModelByTableAction
@@ -16,6 +17,6 @@ class GenerateModelByTableAction
 
     public function execute(): void
     {
-        dddx('WIP');
+        throw new LogicException('GenerateModelByTableAction::execute() non implementato');
     }
 }
