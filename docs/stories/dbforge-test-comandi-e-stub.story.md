@@ -95,3 +95,11 @@ Rischio: toccare Xot (modulo di un'altra sessione) senza coordinarsi; per questo
 1. `cd /mnt/nas07/var/www/_bases/base_quaeris_fila5/laravel && rg -l -P -e '^(it|test)\(|function test|#\[Test\]' Modules/DbForge/tests | wc -l` per vedere se qualcuno ha gia' scritto test; leggere `ViewDatabaseConfigCommand.php` e `ParsePrintPageStringCommand.php`.
 2. Chiedere le decisioni 1-3 all'utente.
 3. Scrivere i due file di test (passi 1, 2, 4), farli passare con la prova a database irraggiungibile quando consentito, poi il fix del passo 3, PHPStan su `Modules/DbForge`, `status` e second brain.
+
+## Nota 2026-11-10
+
+`ViewDatabaseConfigCommand::SECRET_KEY_PARTS` ora e' `private const array`, come nel gemello
+`Modules/Xot/app/Console/Commands/ViewDatabaseConfigCommand.php:25`: era l'unica costante senza tipo del
+modulo e, con le due nuove di `Xot/SecurityMiddleware`, portava il `constantTypeCoverage` di progetto sotto
+il 99 %. Valore invariato (verificato con reflection). Il comando resta una copia di quello Xot: debito DRY
+da valutare con i test di questa story. Dettagli: `laravel/Modules/Xot/docs/stories/filament-5-11-2-filter-form-naming.story.md`.
