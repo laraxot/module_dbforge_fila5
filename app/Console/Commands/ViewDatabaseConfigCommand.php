@@ -20,7 +20,7 @@ class ViewDatabaseConfigCommand extends Command
      *
      * @var list<string>
      */
-    private const SECRET_KEY_PARTS = ['password', 'passwd', 'secret', 'token', 'key', 'url', 'dsn'];
+    private const array SECRET_KEY_PARTS = ['password', 'passwd', 'secret', 'token', 'key', 'url', 'dsn'];
 
     /**
      * The name and signature of the console command.
