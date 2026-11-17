@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\DbForge\Models;
 
 use Illuminate\Support\Carbon;
-use Modules\Quaeris\Models\Profile;
+use Modules\Xot\Contracts\ProfileContract;
 
 /**
  * DbForgeQueryLog model.
@@ -24,9 +24,9 @@ use Modules\Quaeris\Models\Profile;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeQueryLog newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeQueryLog query()
  *
- * @property-read Profile|null $creator
- * @property-read Profile|null $deleter
- * @property-read Profile|null $updater
+ * @property-read ProfileContract|null $creator
+ * @property-read ProfileContract|null $deleter
+ * @property-read ProfileContract|null $updater
  *
  * @mixin \Eloquent
  */
