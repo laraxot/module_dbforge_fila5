@@ -103,3 +103,18 @@ Rischio: toccare Xot (modulo di un'altra sessione) senza coordinarsi; per questo
 modulo e, con le due nuove di `Xot/SecurityMiddleware`, portava il `constantTypeCoverage` di progetto sotto
 il 99 %. Valore invariato (verificato con reflection). Il comando resta una copia di quello Xot: debito DRY
 da valutare con i test di questa story. Dettagli: `laravel/Modules/Xot/docs/stories/filament-5-11-2-filter-form-naming.story.md`.
+
+## Bootstrap PHPStan — verifica operativa
+
+Il bootstrap Laravel può fallire con `Class "Modules\\DbForge\\Providers\\DbForgeServiceProvider" not found` quando l'autoloader Composer del progetto Laravel è stale, anche se il provider esiste e i manifest `module.json` e `composer.json` sono coerenti.
+
+La correzione operativa è rigenerare l'autoloader dal progetto Laravel:
+
+```bash
+cd laravel
+composer dump-autoload --no-scripts --optimize
+php artisan module:list --no-ansi
+./vendor/bin/phpstan analyse Modules --memory-limit=-1 --no-progress
+```
+
+La verifica ha confermato `DbForge` enabled e PHPStan a livello massimo con zero errori. Non sono necessari provider duplicati, registrazioni manuali o soppressioni PHPStan.
