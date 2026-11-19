@@ -55,4 +55,4 @@ Modulo DbForge (database / schema manager / strumenti DB).
 - `outputs/`, `raw/`, `logs/` — archivi
 
 ---
-*Aggiornato: 2026-10-20 — conforme a `docs-organization.md`; `INDEX.md` creato; `00-index.md`, `README.md`, `CHANGELOG.md` mantenuti.
+*Aggiornato: 2026-10-20 — conforme a `docs-organization.md`; `index.md` creato; `00-index.md`, `README.md`, `CHANGELOG.md` mantenuti.
