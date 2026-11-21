@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\DbForge\Models;
 
 use Illuminate\Support\Carbon;
-use Modules\Quaeris\Models\Profile;
 use Modules\Xot\Contracts\ProfileContract;
 
 /**
@@ -26,8 +25,8 @@ use Modules\Xot\Contracts\ProfileContract;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeSchema newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DbForgeSchema query()
  *
- * @property-read Profile|null $deleter
- * @property-read Profile|null $updater
+ * @property-read ProfileContract|null $deleter
+ * @property-read ProfileContract|null $updater
  *
  * @mixin \Eloquent
  */
