@@ -176,3 +176,7 @@ public_html
 tests/AuditCoverage/
 audit-coverage/
 .claude-audit/
+
+# screenshot di comparazione visiva (artefatti locali)
+docs/project/visual-comparison/
+docs/visual-comparison/
